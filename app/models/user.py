@@ -26,8 +26,8 @@ class User(db.Model, UserMixin):
                                 primaryjoin=id == follower_to_followee.c.follower_id,
                                 secondaryjoin=id == follower_to_followee.c.followee_id,
                                 backref=db.backref(
-                                    "follower_to_followee", lazy="dynamic"),
-                                lazy="dynamic"
+                                    "follower_to_followee", lazy="joined"),
+                                lazy="joined"
                                 )
 
     @property
@@ -45,5 +45,9 @@ class User(db.Model, UserMixin):
         return {
             "id": self.id,
             "username": self.username,
-            "email": self.email
+            "email": self.email,
+            "posts": self.posts,
+            "followers": self.followers,
+            "comments": self.comments,
+            "likes": self.likes
         }
