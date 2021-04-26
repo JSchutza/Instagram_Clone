@@ -31,7 +31,7 @@ def post_post():
 
 @post_routes.route("/", methods=["PUT"])
 @login_required
-def post_post():
+def post_put():
     pass
 
 
