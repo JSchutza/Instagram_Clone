@@ -1,6 +1,9 @@
+
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import User, Like, Post, db
+from sqlalchemy import select
+from app.models.user import follower_to_followee
 
 user_routes = Blueprint('users', __name__)
 
@@ -17,3 +20,5 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
