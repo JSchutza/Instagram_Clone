@@ -22,5 +22,8 @@ class Post(db.Model):
             "url": self.url,
             "userId": self.userId,
             "createdAt": self.createdAt,
-            "updatedAt": self.updatedAt
+            "updatedAt": self.updatedAt,
+            "comments": [comment.to_dict() for comment in self.comments],
+            "likes": [like.to_dict() for like in self.likes]
+
         }
