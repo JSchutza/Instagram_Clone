@@ -11,6 +11,7 @@ seed_commands = AppGroup('seed')
 
 
 
+
 # Creates the `flask seed all` command
 @seed_commands.command('all')
 def seed():
@@ -22,7 +23,14 @@ def seed():
     # Add other seed functions here
 
 
+# @seed_commands.command("follows")
+# def seed_follows():
+#     seed_follows()
 
+
+# @seed_commands.command("followsundo")
+# def seed_follows_undo():
+#     undo_follows()
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
