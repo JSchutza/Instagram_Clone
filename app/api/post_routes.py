@@ -2,7 +2,7 @@ import boto3
 import uuid
 import os
 from flask import Blueprint, redirect, request
-from app.models import Post, db
+from app.models import Post, User, db
 from flask_login import login_required, current_user
 
 
@@ -44,14 +44,23 @@ def upload_file_to_s3(file, acl="public-read"):
 post_routes = Blueprint("posts", __name__)
 
 
-@post_routes.route("/")
+@post_routes.route("")
 @login_required
 def posts():
     user_id = current_user.get_id()
-    posts = Post.query.filter(Post.userId == user_id)
-    if posts is None:
+    # user = User.query.get(3)
+    user = User.query.get(user_id)
+    result = []
+
+    print(user_id, '*************************************')
+    for follower in user.followers:
+        for post in Post.query.filter(Post.userId == follower.id):
+            result.append(post)
+    result.sort(key=lambda post: post.createdAt)
+
+    if result is None:
         return "no posts found"
-    return {"posts": [post.to_dict() for post in posts]}
+    return {"posts": [post.to_dict() for post in result]}
 
 
 @post_routes.route("/<int:id>")

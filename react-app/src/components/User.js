@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Profile from './Profile.js';
 
 function User() {
   const [user, setUser] = useState({});
@@ -33,6 +34,7 @@ function User() {
       <li>
         <strong>Email</strong> {user.email}
       </li>
+      <Profile/>
     </ul>
   );
 }
