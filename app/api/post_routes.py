@@ -2,7 +2,7 @@ import boto3
 import uuid
 import os
 from flask import Blueprint, redirect, request
-from app.models import Post, db
+from app.models import Post, db, Comment
 from flask_login import login_required, current_user
 
 
@@ -116,3 +116,40 @@ def post_delete(id):
         db.session.delete(post)
         db.session.commit()
     return redirect("/")
+
+
+@post_routes.route("/<int:id>", methods=["POST"])
+@login_required
+def comment_post(id):
+    user_id = current_user.get_id()
+    form = request.form
+    new_comment = Comment(
+        userId = user_id,
+        postId = id,
+        body = form['body']
+    )
+    db.session.add(new_comment)
+    db.session.commit()
+    return new_comment
+    
+
+@post_routes.route("/<int:id>/comments/<int:cid>", methods=["PUT"])
+@login_required
+def comment_post(cid):
+    old_comment = Comment.query.get(cid)
+    form = request.form
+    old_comment.update(body=form['body'])
+    db.session.commit()
+    return old_comment
+
+
+@post_routes.route("/<int:id>/comments/<int:cid>", methods=["DELETE"])
+@login_required
+def comment_post(cid):
+    old_comment = Comment.query.get(cid)
+    user_id = current_user.get_id()
+    comment_user = Comment.query.get(cid).userId
+    if user_id == comment_user:
+        db.session.delete(old_comment)
+        db.session.commit()
+    return old_comment
