@@ -89,6 +89,7 @@ def post_post():
 
     url = upload["url"]
     # flask_login allows us to get the current user from the request
+
     new_image = Post(userId=current_user.get_id(), url=url, caption=form["caption"])
 
     db.session.add(new_image)
