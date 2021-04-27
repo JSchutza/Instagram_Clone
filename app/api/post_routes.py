@@ -142,7 +142,7 @@ def comment_post(id):
     db.session.add(new_comment)
     db.session.commit()
     return new_comment
-    
+
 
 @post_routes.route("/<int:id>/comments/<int:cid>", methods=["PUT"])
 @login_required
@@ -179,7 +179,7 @@ def like_post(id):
     return new_like
 
 
-@post_routes.route('/<int:id>/likes/<int:lid>', method=['DELETE'])
+@post_routes.route('/<int:id>/likes/<int:lid>', methods=['DELETE'])
 @login_required
 def like_delete(lid):
     old_like = Like.query.get(lid)
