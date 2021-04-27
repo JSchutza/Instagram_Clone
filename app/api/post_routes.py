@@ -2,7 +2,7 @@ import boto3
 import uuid
 import os
 from flask import Blueprint, redirect, request
-from app.models import Post, db, Comment
+from app.models import Post, db, Comment, Like
 from flask_login import login_required, current_user
 
 
@@ -135,7 +135,7 @@ def comment_post(id):
 
 @post_routes.route("/<int:id>/comments/<int:cid>", methods=["PUT"])
 @login_required
-def comment_post(cid):
+def comment_put(cid):
     old_comment = Comment.query.get(cid)
     form = request.form
     old_comment.update(body=form['body'])
@@ -145,7 +145,7 @@ def comment_post(cid):
 
 @post_routes.route("/<int:id>/comments/<int:cid>", methods=["DELETE"])
 @login_required
-def comment_post(cid):
+def comment_delete(cid):
     old_comment = Comment.query.get(cid)
     user_id = current_user.get_id()
     comment_user = Comment.query.get(cid).userId
@@ -153,3 +153,25 @@ def comment_post(cid):
         db.session.delete(old_comment)
         db.session.commit()
     return old_comment
+
+
+# POST /api/post/:id/likes
+# DELETE /api/post/:id/likes/:id
+
+@post_routes.route("/<int:id>/likes", methods=['POST'])
+@login_required
+def like_post(id):
+    user_id = current_user.get_id()
+    new_like = Like(userId = user_id, postId = id)
+    db.session.add(new_like)
+    db.session.commit()
+    return new_like
+
+
+@post_routes.route('/<int:id>/likes/<int:lid>', method=['DELETE'])
+@login_required
+def like_delete(lid):
+    old_like = Like.query.get(lid)
+    db.session.delete(old_like)
+    db.session.commit()
+    return old_like
