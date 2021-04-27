@@ -7,23 +7,31 @@ from random import randint
 fake = Faker()
 
 
-
-# https://picsum.photos/614/614
 def get_random_img():
-  response = requests.get('https://picsum.photos/614/614')
+  response = requests.get("https://picsum.photos/v2/list")
 
   if response.status_code == 200:
-    return response.url
+
+    result = []
+    for each in response.json():
+      result.append(each["download_url"])
+
+    return result
   return None
 
 
 
 
+
+
+
+
 def seed_posts():
+  url_list = get_random_img()
   count = 4000
   result = []
   while count > 0:
-    result.append(Post(caption=fake.text(max_nb_chars=100), url=get_random_img(), userId=randint(1, 200)))
+    result.append(Post(caption=fake.text(max_nb_chars=100), url=url_list[randint(1, 29)], userId=randint(1, 200)))
     count -= 1
 
   for post in result:
