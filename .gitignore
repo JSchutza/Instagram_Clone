@@ -115,4 +115,4 @@ dmypy.json
 
 
 # Pipfile.lock
-.lock
+Pipfile.lock
