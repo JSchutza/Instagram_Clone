@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFlwrPosts } from "../store/post";
-import { thunk_allUsers } from '../store/session';
 
 
 const Feed = () => {
@@ -9,7 +8,6 @@ const Feed = () => {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch()
     const posts = useSelector((store) => store.postReducer)
-    const normalizedPostData = useSelector((store) => store.allUsersReducer)
 
 
     useEffect(() => {
@@ -26,8 +24,6 @@ const Feed = () => {
             </>
         )
     } else {
-        // posts.forEach(post => dispatch(thunk_allUsers(post.userId)))
-
 
         return (
             <>
@@ -36,7 +32,6 @@ const Feed = () => {
                     <>
                     <div>
                             {/* Created by: {normalizedPostData[post.userId]} */}
-                            {normalizedPostData !== null ? <p>works</p>: <p>broken</p>}
                     </div>
                     <div>
                         <img src={post.url} key={post.id} />

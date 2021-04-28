@@ -1,11 +1,11 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
-const ALL_USERS = "session/ALL_USERS";
+const GET_FOLLOWERS = "session/GET_FOLLOWERS";
 
-const allUsers = (users) => ({
-    type: ALL_USERS,
-    payload: users
+const getFollowers = (followers) => ({
+    type: GET_FOLLOWERS,
+    payload: followers
 })
 
 
@@ -83,18 +83,19 @@ export const signUp = (username, email, password) => async (dispatch)=> {
 }
 
 
-export const thunk_allUsers = (userId) => async (dispatch) => {
+export const thunk_getFollowers = () => async (dispatch) => {
 
-    const response = await fetch(`/api/users/followers/${userId}`, {
+    const response = await fetch(`/api/users/followers`, {
         headers: {
             "Content-Type": "application/json",
-        }
+        },
+        credentials: 'include'
     });
     const data = await response.json();
     if (data.errors) {
         return;
     }
-    dispatch(allUsers(data))
+    dispatch(getFollowers(data))
 }
 
 
@@ -102,9 +103,9 @@ export const thunk_allUsers = (userId) => async (dispatch) => {
 
 // reducers
 
-export const allUsersReducer = (state = null, action) => {
+export const getFollowersReducer = (state = null, action) => {
     switch (action.type) {
-        case ALL_USERS:
+        case GET_FOLLOWERS:
             return { ...state, [action.payload.id]: action.payload };
         default:
             return state;

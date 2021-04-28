@@ -54,7 +54,7 @@ def posts():
     user = User.query.get(user_id)
     result = []
 
-    print(user_id, '*************************************')
+    # print(user_id, '*************************************')
     for follower in user.followers:
         for post in Post.query.filter(Post.userId == follower.id):
             result.append(post)

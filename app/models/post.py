@@ -1,5 +1,8 @@
 from .db import db
+from .user import User
 from datetime import datetime
+
+
 
 
 class Post(db.Model):
@@ -21,9 +24,9 @@ class Post(db.Model):
             "caption": self.caption,
             "url": self.url,
             "userId": self.userId,
+            "username": User.query.get(self.userId).username,
             "createdAt": self.createdAt,
             "updatedAt": self.updatedAt,
             "comments": [comment.to_dict() for comment in self.comments],
             "likes": [like.to_dict() for like in self.likes]
-
         }
