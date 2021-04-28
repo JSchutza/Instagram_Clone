@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Profile from './Profile.js';
+import Profile from '../ProfilePage/Profile.js';
+import './User.css'
 
 function User() {
 
@@ -9,9 +10,11 @@ function User() {
 
 
   return (
-    <>
-      <Profile />
-    </>
+    <div className='profile-container'>
+      <Profile/>
+
+    </div>
+    
   );
 }
 

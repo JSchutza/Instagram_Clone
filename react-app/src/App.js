@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import User from "./components/User";
+import User from "./components/User/User";
 import Feed from "./components/Feed"
 
 import { authenticate } from "./store/session";
