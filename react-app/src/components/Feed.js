@@ -14,24 +14,57 @@ const Feed = () => {
         dispatch(getFlwrPosts())
         setLoaded(true);
     },[])
- 
+
+
+
     if (!loaded || posts === null) {
         return (
             <>
                 <h1>Loading...</h1>
             </>
         )
+    } else {
+
+        return (
+            <>
+            <div>
+                    { Object.values(posts).map(post => (
+                    <>
+                    <div>
+                        {post.username}
+                    </div>
+                    <div>
+                        <img src={post.url} key={post.id} />
+                    </div>
+
+                    <div>
+                        <p> {post.caption} </p>
+                    </div>
+
+                    <div>
+                        {post.comments.map(comment => (
+                            <ul>
+                                <li key={comment.id}> {comment.body} </li>
+                            </ul>
+                        ))}
+                    </div>
+
+                    <div>
+                        {post.likes.length === 1 ? <p> {post.likes.length} like </p> : <p>{post.likes.length} likes </p> }
+                    </div>
+
+
+
+                    </>
+                ))}
+            </div>
+            </>
+        )
     }
 
-    return (
-        <>
-        <div>
-            { posts.posts.map(post => (
-                <img src={post.url} key={post.id} />
-            ))}
-        </div>
-        </>
-    )
+
+
+
 }
 
 export default Feed;
