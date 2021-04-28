@@ -1,6 +1,13 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const ALL_USERS = "session/ALL_USERS";
+
+const allUsers = (users) => ({
+    type: ALL_USERS,
+    payload: users
+})
+
 
 const setUser = (user) => ({
     type: SET_USER,
@@ -26,7 +33,7 @@ export const authenticate = () => async (dispatch) => {
         return;
     }
     dispatch(setUser(data))
-    
+
 }
 
 export const login = (email, password) => async (dispatch) => {
@@ -75,7 +82,36 @@ export const signUp = (username, email, password) => async (dispatch)=> {
     dispatch(setUser(data));
 }
 
-// reducer
+
+export const thunk_allUsers = (userId) => async (dispatch) => {
+
+    const response = await fetch(`/api/users/followers/${userId}`, {
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    const data = await response.json();
+    if (data.errors) {
+        return;
+    }
+    dispatch(allUsers(data))
+}
+
+
+
+
+// reducers
+
+export const allUsersReducer = (state = null, action) => {
+    switch (action.type) {
+        case ALL_USERS:
+            return { ...state, [action.payload.id]: action.payload };
+        default:
+            return state;
+    }
+}
+
+
 
 const initialState = { user: null };
 

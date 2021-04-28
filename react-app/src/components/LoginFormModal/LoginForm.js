@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import  { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { login } from "../../store/session";
+import { login, thunk_allUsers } from "../../store/session";
+
+
+
+
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -9,6 +13,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -18,17 +23,23 @@ const LoginForm = () => {
     }
   };
 
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
+
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
 
+
+
   if (user) {
     return <Redirect to="/" />;
   }
+
+
 
   return (
     <form onSubmit={onLogin}>

@@ -22,3 +22,15 @@ def user(id):
     return user.to_dict()
 
 
+
+@user_routes.route('/followers/<int:id>')
+@login_required
+def followers(id):
+    user = User.query.get(id)
+    user_data = user.to_dict()
+    followers_array = user_data["followers"]
+
+    normalized_data = { followers_array[each]: User.query.get(followers_array[each]).username
+                        for each in range(len(followers_array)) }
+
+    return { "username": user.username, "id": user.id, "followers": normalized_data }

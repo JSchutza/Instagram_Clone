@@ -7,7 +7,7 @@ const getFollowersPosts = (posts) => ({
 
 export const getFlwrPosts = () => async (dispatch) => {
     const response = await fetch('api/posts', {
-        headers: { 
+        headers: {
             'Content-Type': 'application/json',
         },
         credentials: 'include'
@@ -23,7 +23,7 @@ export const getFlwrPosts = () => async (dispatch) => {
 export default function postReducer(state = null, action) {
     switch (action.type) {
         case GET_FOLLOWERS_POSTS:
-            return { ...state, ...action.payload };
+            return { ...state, ...action.payload.posts };
         default:
             return state;
     }
