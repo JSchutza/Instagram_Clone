@@ -20,38 +20,6 @@ const CreatePost = () => {
     setErrors(errors);
   }, [img]);
 
-
-
-  // const onSubmit = async (e) => {
-  //   e.preventDefault();
-  //   console.log(captionText);
-  //   console.log(img);
-  //   const response = await fetch('api/posts', {
-  //     method: 'POST',
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       "caption": captionText,
-  //       "image": img
-  //     })
-  //   });
-
-  //   const the_data = await response.json();
-
-  //   if (the_data.errors) {
-  //     console.log(the_data.errors)
-  //   }
-
-  //   if (!the_data.errors) {
-  //     history.push('/profile')
-  //   }
-  // }
-
-
-
-// onSubmit={onSubmit}
-
   return (
     <>
 
