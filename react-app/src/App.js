@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import User from "./components/User/User";
 import Feed from "./components/Feed"
+import CreatePost from "./components/CreatePost";
 
 import { authenticate } from "./store/session";
 
@@ -47,6 +48,9 @@ function App() {
           <User />
         </Route>
 
+        <Route path="/test" exact={true}>
+          <CreatePost />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
