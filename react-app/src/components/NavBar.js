@@ -38,6 +38,11 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/test" >
+            Create Post
+          </NavLink>
+        </li>
+        <li>
           {sessionLinks}
         </li>
       </ul>

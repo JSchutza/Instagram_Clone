@@ -2,10 +2,12 @@ import boto3
 import uuid
 import os
 from flask import Blueprint, redirect, request
-
 from app.models import Post, User, db, Comment, Like
-
 from flask_login import login_required, current_user
+from app.forms import CreatePostForm
+from werkzeug.datastructures import CombinedMultiDict
+
+
 
 
 s3 = boto3.client(
@@ -54,11 +56,6 @@ def posts():
     user = User.query.get(user_id)
     result = []
 
-<<<<<<< HEAD
-    # print(user_id, '*************************************')
-=======
-    print(user_id, "*************************************")
->>>>>>> main
     for follower in user.followers:
         for post in Post.query.filter(Post.userId == follower.id):
             result.append(post)
@@ -80,37 +77,38 @@ def post(id):
 @post_routes.route("", methods=["POST"])
 @login_required
 def post_post():
-    print(request.form)
-    if "image" not in request.files:
-        return {"errors": "image required"}, 400
 
-    image = request.files["image"]
-    form = request.form
-    form = dict(form)
-    print(form)
+    form = CreatePostForm(CombinedMultiDict((request.files, request.form)))
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
+    if form.validate_on_submit():
+        # print(form.data, "------------------------------------------ \n")
 
-    image.filename = get_unique_filename(image.filename)
+        image = form.data["image"]
+        # print(dir(image), "------------------------------------------ \n")
 
-    upload = upload_file_to_s3(image)
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
 
-    if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
-        return upload, 400
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
 
-    url = upload["url"]
-    # flask_login allows us to get the current user from the request
 
-    new_image = Post(userId=current_user.get_id(), url=url, caption=form["caption"])
+        if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when we tried to upload
+            # so we send back that error message
+            return upload, 400
 
-    db.session.add(new_image)
-    db.session.commit()
-    return {"url": url}
+        url = upload["url"]
+        # flask_login allows us to get the current user from the request
 
+        new_image = Post(userId=current_user.get_id(), url=url, caption=form.data["caption"])
+
+        db.session.add(new_image)
+        db.session.commit()
+        return {"url": url}
+    return {"message": "poop"}
 
 @post_routes.route("/", methods=["PUT"])
 @login_required
@@ -180,15 +178,8 @@ def like_post(id):
     return new_like
 
 
-<<<<<<< HEAD
+
 @post_routes.route('/<int:id>/likes/<int:lid>', methods=['DELETE'])
-=======
-<<<<<<< HEAD
-@post_routes.route("/<int:id>/likes/<int:lid>", methods=["DELETE"])
-=======
-@post_routes.route('/<int:id>/likes/<int:lid>', methods=['DELETE'])
->>>>>>> 4a3269c291c531db4cec89cd7aae5c87daec099e
->>>>>>> main
 @login_required
 def like_delete(lid):
     old_like = Like.query.get(lid)
