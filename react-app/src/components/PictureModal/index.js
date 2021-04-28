@@ -3,16 +3,11 @@ import { Modal } from '../../context/Modal';
 import Picture from './Picture.js'
 function PictureModal({post}) {
 
-    const [showModal, setShowModal] = useState(-1);
+    const [showModal, setShowModal] = useState(true);
 
     return (
         <>
-          
-            {showModal && (
-                <Modal onClose={() => setShowModal(-1)}>
-                    <Picture post={post}/>
-                </Modal>
-            )}
+            <Picture post={post}/>
         </>
     );
 }
