@@ -11,12 +11,12 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     caption = db.Column(db.String(100))
     url = db.Column(db.String, nullable=False)
-    userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey("users.id", ondelete='CASCADE'), nullable=False)
     createdAt = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updatedAt = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    likes = db.relationship("Like", backref="posts", cascade="all, delete")
+    likes = db.relationship("Like", backref="posts", cascade="all, delete", passive_deletes=True)
     comments = db.relationship(
-        "Comment", backref="posts", cascade="all, delete")
+        "Comment", backref="posts", cascade="all, delete", passive_deletes=True)
 
     def to_dict(self):
         return {

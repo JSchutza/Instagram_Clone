@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import React from 'react'
 import './Picture.css'
+import { deletePost } from '../../store/post';
 
 const Picture = ({post}) => {
     const user = useSelector(state => state.session.user)
+    const dispatch = useDispatch();
 
     return (
         <div>
@@ -16,7 +18,7 @@ const Picture = ({post}) => {
             { user.id === post.userId && (
                 <>
                 <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={() => dispatch(deletePost(post.id))}>Delete</button>
                 </>
             )}
         </div>

@@ -117,16 +117,21 @@ def post_put():
 @post_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def post_delete(id):
+    
     user_id = current_user.get_id()
+    
     post_user = Post.query.get(id).userId
+    
     if user_id == post_user:
         post_url = Post.query.get(id).url
         key = post_url[33:]
-        s3.delete_object(Bucket=BUCKET_NAME, Key=key)
+        if post_url.startswith(S3_LOCATION):
+            s3.delete_object(Bucket=BUCKET_NAME, Key=key)
         post = Post.query.get(id)
-        db.session.delete(post)
+        post.delete()
         db.session.commit()
-    return redirect("/")
+       
+    return {'message': 'success'}
 
 
 @post_routes.route("/<int:id>", methods=["POST"])
