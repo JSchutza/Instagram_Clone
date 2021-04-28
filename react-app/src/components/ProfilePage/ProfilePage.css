@@ -1,0 +1,18 @@
+.images {
+    display: flex;
+    margin: 10px;
+    border-radius: 30px;
+    object-fit: fill;
+    float: left;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+
+}
+/* 
+.img-container {
+    display: flex;
+
+    justify-content: center;
+} */
+

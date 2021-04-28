@@ -179,7 +179,7 @@ def like_post(id):
     return new_like
 
 
-@post_routes.route('/<int:id>/likes/<int:lid>', method=['DELETE'])
+@post_routes.route('/<int:id>/likes/<int:lid>', methods=['DELETE'])
 @login_required
 def like_delete(lid):
     old_like = Like.query.get(lid)
