@@ -31,7 +31,7 @@ const Feed = () => {
                     { Object.values(posts).map(post => (
                     <>
                     <div>
-                            {/* Created by: {normalizedPostData[post.userId]} */}
+                        {post.username}
                     </div>
                     <div>
                         <img src={post.url} key={post.id} />
