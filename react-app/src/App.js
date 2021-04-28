@@ -42,15 +42,10 @@ function App() {
           <Feed />
         </ProtectedRoute>
 
-        {/* <ProtectedRoute path="/users/:userId" exact={true} > */}
-        {/* </ProtectedRoute> */}
-        <Route path="/profile" exact={true} >
+        <ProtectedRoute path="/profile" exact={true} >
           <User />
-        </Route>
+        </ProtectedRoute>
 
-        <Route path="/test" exact={true}>
-          <CreatePost />
-        </Route>
       </Switch>
     </BrowserRouter>
   );
