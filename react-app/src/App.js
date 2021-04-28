@@ -41,8 +41,8 @@ function App() {
           <Feed />
         </ProtectedRoute>
 
-        {/* <ProtectedRoute path="/users/:userId" exact={true} > */}
-        {/* </ProtectedRoute> */}
+        <ProtectedRoute path="/users/:userId" exact={true} >
+        </ProtectedRoute>
         <Route path="/profile" exact={true} >
           <User />
         </Route>

@@ -54,11 +54,7 @@ def posts():
     user = User.query.get(user_id)
     result = []
 
-<<<<<<< HEAD
     # print(user_id, '*************************************')
-=======
-    print(user_id, "*************************************")
->>>>>>> main
     for follower in user.followers:
         for post in Post.query.filter(Post.userId == follower.id):
             result.append(post)
@@ -180,15 +176,15 @@ def like_post(id):
     return new_like
 
 
-<<<<<<< HEAD
+
 @post_routes.route('/<int:id>/likes/<int:lid>', methods=['DELETE'])
-=======
-<<<<<<< HEAD
+
+
 @post_routes.route("/<int:id>/likes/<int:lid>", methods=["DELETE"])
-=======
+
 @post_routes.route('/<int:id>/likes/<int:lid>', methods=['DELETE'])
->>>>>>> 4a3269c291c531db4cec89cd7aae5c87daec099e
->>>>>>> main
+
+
 @login_required
 def like_delete(lid):
     old_like = Like.query.get(lid)
