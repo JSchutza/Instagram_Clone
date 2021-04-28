@@ -18,8 +18,10 @@ function App() {
 
 
   useEffect(() => {
-    dispatch(authenticate())
-    setLoaded(true);
+    (async () => {
+      await dispatch(authenticate())
+      setLoaded(true);
+    })();
   }, [dispatch]);
 
 

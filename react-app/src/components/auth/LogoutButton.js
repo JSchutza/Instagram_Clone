@@ -10,9 +10,9 @@ const LogoutButton = () => {
   const dispatch = useDispatch();
 
 
-  const onLogout = (event) => {
+  const onLogout = async (event) => {
     event.preventDefault();
-    dispatch(logout());
+    await dispatch(logout());
   };
 
 
