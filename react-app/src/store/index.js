@@ -3,12 +3,14 @@ import thunk from 'redux-thunk';
 import session, { getFollowersReducer } from './session'
 import postReducer from './post';
 import searchReducer from './search'
+import commentReducer from './comment'
 
 const rootReducer = combineReducers({
     session,
     getFollowersReducer,
     postReducer,
-    searchReducer
+    searchReducer,
+    commentReducer
 });
 
 

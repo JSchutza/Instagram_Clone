@@ -1,17 +1,25 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LogoutButton from './auth/LogoutButton';
 import LoginFormModal from './LoginFormModal';
 import SignupFormModal from './SignupFormModal';
 import CreatePostModal from './CreatePost';
 import SearchBar from './SearchBar';
+import { clearPosts } from '../store/post'
 
 
 
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
+  const dispatch = useDispatch()
+
+  const resetPosts = () => {
+    // event.preventDefault();
+    dispatch(clearPosts())
+
+  }
 
   let sessionLinks;
   if (sessionUser) {
@@ -19,6 +27,9 @@ const NavBar = () => {
       <>
         <LogoutButton />
         <CreatePostModal/>
+        <NavLink to="/profile" exact={true} activeClassName="active" onClick={() => resetPosts()}>
+          Profile
+        </NavLink>
       </>
     );
   } else {
@@ -36,7 +47,7 @@ const NavBar = () => {
     <nav>
       <ul>
         <li>
-          <NavLink to="/" exact={true} activeClassName="active">
+          <NavLink to="/" exact={true} activeClassName="active" onClick={() => resetPosts()}>
             Home
           </NavLink>
           <SearchBar/>
