@@ -42,7 +42,7 @@ function App() {
           <h1>Feed</h1>
           <Feed />
         </ProtectedRoute>
-      
+
         <ProtectedRoute path="/profile" exact={true} >
           <User />
         </ProtectedRoute>
@@ -52,9 +52,9 @@ function App() {
           <UserProfile/>
         </ProtectedRoute>
 
-        <Route path='/search'>
+        <ProtectedRoute path='/search'>
           <SearchPage/>
-        </Route>
+        </ProtectedRoute>
 
 
       </Switch>

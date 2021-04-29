@@ -11,6 +11,9 @@ const CreatePost = () => {
   const [ errors, setErrors ] = useState([]);
   const history = useHistory();
 
+
+
+
   useEffect(() => {
     const errors = [];
     if (!img) {

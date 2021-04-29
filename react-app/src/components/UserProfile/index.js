@@ -1,31 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from 'react-router-dom'
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
 import "./ProfilePage.css";
 import PictureModal from "../PictureModal/Picture";
 import { Modal } from "../../context/Modal";
-import { getUsrPosts } from "../../store/post";
+
 
 
 function UserProfile() {
   const [showModal, setShowModal] = useState(-1);
-  const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch()
-  const id = useParams()
-  
-  useEffect(() => {
-    dispatch(getUsrPosts(id))
-    setLoaded(true);
-  },[])
-
   const posts = useSelector((store) => store.postReducer)
-
   const userPosts = Object.values(posts)
+  let user = []
+  // userPosts.forEach((post) => { user.push(post.username) })
+  for(let i = 0; i < userPosts.length; i++) {
+    let post = userPosts[i];
+    user.push(post.username)
+    if (user.length > 0) break
+  }
+
 
   return (
     <>
       <div className="image-container">
-        <h2>{userPosts[0].username} posts </h2>
+        <h2>  {user[0]}'s posts </h2>
         {userPosts.map((post) => (
           <div className="inner-image-container" key={post.id}>
             <img
