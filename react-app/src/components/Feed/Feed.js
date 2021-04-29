@@ -7,7 +7,7 @@ const Feed = () => {
 
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch()
-    const posts = useSelector((store) => store.postReducer)
+    const posts = useSelector((store) => store.postReducer.feed)
 
 
     useEffect(() => {

@@ -35,3 +35,18 @@ def followers():
                         for each in range(len(followers_array)) }
 
     return { "username": user.username, "id": user.id, "followers": normalized_data }
+
+
+
+@user_routes.route('/posts')
+@login_required
+def users_posts():
+    userId = current_user.get_id()
+    user = User.query.get(userId)
+    user_data = user.get_user_posts()
+
+    user_data = user_data["posts"]
+
+    normalized_data = {each["id"]: each for each in user_data}
+
+    return {"username": user.username, "id": user.id, "posts": normalized_data }

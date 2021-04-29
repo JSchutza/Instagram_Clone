@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import User from "./components/User/User";
 import Feed from "./components/Feed/Feed"
-import CreatePost from "./components/CreatePost";
+import { thunk_getPosts } from './store/post'
 
 import { authenticate } from "./store/session";
 
@@ -21,6 +21,7 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate())
+      await dispatch(thunk_getPosts())
       setLoaded(true);
     })();
   }, [dispatch]);

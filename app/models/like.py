@@ -1,4 +1,5 @@
 from .db import db
+from .user import User
 
 
 class Like(db.Model):
@@ -13,4 +14,5 @@ class Like(db.Model):
             "id": self.id,
             "userId": self.userId,
             "postId": self.postId,
+            "username": User.query.get(self.userId).username
         }
