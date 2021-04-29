@@ -18,6 +18,11 @@ class Post(db.Model):
     comments = db.relationship(
         "Comment", backref="posts", cascade="all, delete")
 
+
+
+
+
+
     def to_dict(self):
         return {
             "id": self.id,

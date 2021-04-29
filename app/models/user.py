@@ -39,6 +39,26 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+
+    def get_user_posts(self):
+        return {
+            "posts": [post.to_dict() for post in self.posts]
+        }
+
+
+    def get_user_comments(self):
+        return {
+            "comments": [comment.to_dict() for comment in self.comments]
+        }
+
+
+
+    def get_user_likes(self):
+        return {
+            "likes": [like.to_dict() for like in self.likes]
+        }
+
+
     def to_dict(self):
         return {
             "id": self.id,
