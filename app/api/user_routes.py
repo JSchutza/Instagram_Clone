@@ -50,3 +50,32 @@ def users_posts():
     normalized_data = {each["id"]: each for each in user_data}
 
     return {"username": user.username, "id": user.id, "posts": normalized_data }
+
+
+
+@user_routes.route('/comments')
+@login_required
+def users_comments():
+    userId = current_user.get_id()
+    user = User.query.get(userId)
+    user_data = user.get_user_comments()
+    user_data = user_data["comments"]
+    # set the key here to comment id but may want to set it to postId so we can look it up in the store??
+    normalized_data = {each["id"]: each for each in user_data}
+
+
+    return {"username": user.username, "id": user.id, "comments": normalized_data }
+
+
+
+@user_routes.route('/likes')
+@login_required
+def users_likes():
+    userId = current_user.get_id()
+    user = User.query.get(userId)
+    user_data = user.get_user_likes()
+    user_data = user_data["likes"]
+    # set the key here to like id but may want to set it to postId so we can look it up in the store??
+    normalized_data = {each["id"]: each for each in user_data}
+
+    return {"username": user.username, "id": user.id, "likes": normalized_data}
