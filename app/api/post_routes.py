@@ -119,7 +119,9 @@ def post_post():
         db.session.add(new_image)
         db.session.commit()
         return {"url": url}
-    return {"message": "poop"}
+    return {"message": "error creating a post. "}
+
+
 
 @post_routes.route("/", methods=["PUT"])
 @login_required

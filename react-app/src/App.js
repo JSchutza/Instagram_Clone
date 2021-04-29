@@ -42,21 +42,12 @@ function App() {
           <h1>Feed</h1>
           <Feed />
         </ProtectedRoute>
-
-        <ProtectedRoute path="/profile/:id">
-          <UserProfile/>
-        </ProtectedRoute>
-      
         <ProtectedRoute path="/profile" exact={true} >
           <User />
         </ProtectedRoute>
-
-
-
         <ProtectedRoute path="/profile/:id">
           <UserProfile/>
         </ProtectedRoute>
-
         <ProtectedRoute path='/search'>
           <SearchPage/>
         </ProtectedRoute>

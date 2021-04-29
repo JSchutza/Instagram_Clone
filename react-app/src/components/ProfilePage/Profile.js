@@ -12,7 +12,7 @@ function Profile() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch()
   const user = useSelector((store) => store.session.user);
-  
+
   useEffect(() => {
     dispatch(getUsrPosts(user.id))
     setLoaded(true);

@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from 'react-router-dom'
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
 import "./ProfilePage.css";
 import PictureModal from "../PictureModal/Picture";
 import { Modal } from "../../context/Modal";
 import { getUsrPosts } from "../../store/post";
 import { clearPosts } from '../../store/post'
 import { resetUser } from "../../store/session";
-
-
 
 function UserProfile() {
   const [showModal, setShowModal] = useState(-1);
@@ -42,6 +40,14 @@ function UserProfile() {
   }
 
   const userPosts = Object.values(posts)
+  let user = []
+  // userPosts.forEach((post) => { user.push(post.username) })
+  for(let i = 0; i < userPosts.length; i++) {
+    let post = userPosts[i];
+    user.push(post.username)
+    if (user.length > 0) break
+  }
+
 
   return (
     <>

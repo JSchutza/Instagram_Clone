@@ -16,9 +16,7 @@ const NavBar = () => {
   const dispatch = useDispatch()
 
   const resetPosts = () => {
-    // event.preventDefault();
     dispatch(clearPosts())
-
   }
 
   let sessionLinks;
