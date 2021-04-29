@@ -1,6 +1,5 @@
 from .db import db
 from datetime import datetime
-from .user import User
 
 
 class Comment(db.Model):
@@ -20,6 +19,5 @@ class Comment(db.Model):
             "postId": self.postId,
             "body": self.body,
             "createdAt": self.createdAt,
-            "updatedAt": self.updatedAt,
-            "username": User.query.get(self.userId).username
+            "updatedAt": self.updatedAt
         }

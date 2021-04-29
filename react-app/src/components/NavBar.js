@@ -18,9 +18,6 @@ const NavBar = () => {
       <>
         <LogoutButton />
         <CreatePostModal/>
-        <NavLink to="/profile" exact={true} activeClassName="active">
-          Profile
-        </NavLink>
       </>
     );
   } else {

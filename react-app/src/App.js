@@ -4,10 +4,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import User from "./components/User/User";
-import Feed from "./components/Feed/Feed"
-import { thunk_getPosts } from './store/post'
-import { thunk_getUsersComments } from './store/comment'
-import { thunk_getUsersLikes } from './store/like'
+import Feed from "./components/Feed"
+import CreatePost from "./components/CreatePost";
 
 import { authenticate } from "./store/session";
 
@@ -23,9 +21,6 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate())
-      await dispatch(thunk_getPosts())
-      await dispatch(thunk_getUsersComments())
-      await dispatch(thunk_getUsersLikes())
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -47,10 +42,15 @@ function App() {
           <Feed />
         </ProtectedRoute>
 
-        <ProtectedRoute path="/profile" exact={true} >
+        {/* <ProtectedRoute path="/users/:userId" exact={true} > */}
+        {/* </ProtectedRoute> */}
+        <Route path="/profile" exact={true} >
           <User />
-        </ProtectedRoute>
+        </Route>
 
+        <Route path="/test" exact={true}>
+          <CreatePost />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
