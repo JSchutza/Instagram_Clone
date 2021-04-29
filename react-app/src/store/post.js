@@ -29,6 +29,7 @@ const removePost = (post) => {
     };
 };
 
+
 export const deletePost = (post) => async (dispatch) => {
     const response = await fetch(`/api/posts/${post.id}`, {
         method: 'DELETE',
@@ -55,7 +56,7 @@ export const getFlwrPosts = () => async (dispatch) => {
 
 
 export const getUsrPosts = (id) => async (dispatch) => {
-    const response = await fetch(`api/posts/user/${id}`, {
+    const response = await fetch(`/api/posts/user/${id}`, {
         headers: {
             'Content-Type': 'application/json',
         },
