@@ -1,5 +1,5 @@
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, Like, Post, db
 from sqlalchemy import select
@@ -35,3 +35,26 @@ def followers():
                         for each in range(len(followers_array)) }
 
     return { "username": user.username, "id": user.id, "followers": normalized_data }
+
+@user_routes.route('/follow')
+@login_required
+def follow():
+    userId1 = int(current_user.get_id())
+    userId2 = int(request.args['userId2'])
+    
+    user1 = User.query.get(userId1)
+    user2 = User.query.get(userId2)
+    
+    if user2 in user1.followers:
+        user1.followers.remove(user2)
+    else:
+        user1.followers.append(user2)
+    db.session.commit()
+    return '200'
+
+@user_routes.route('/reset')
+@login_required
+def reset():
+    user_id = int(current_user.get_id())
+    user = User.query.get(user_id)
+    return {'user': user.to_dict()}
