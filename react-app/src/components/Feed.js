@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFlwrPosts } from "../../store/post";
+import { getFlwrPosts } from "../store/post";
 
 
 const Feed = () => {
 
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch()
-    const posts = useSelector((store) => store.postReducer.feed)
+    const posts = useSelector((store) => store.postReducer)
 
 
     useEffect(() => {
