@@ -72,7 +72,7 @@ def posts():
 def user_posts(uid):
     user_id = uid
     posts = Post.query.filter(Post.userId == user_id)
-    
+
     return {"posts": [post.to_dict() for post in posts]}
 
 @post_routes.route("/<int:id>")
@@ -130,7 +130,7 @@ def post_put():
 @post_routes.route("/<int:pid>", methods=["DELETE"])
 @login_required
 def post_delete(pid):
-    
+
     user_id = int(current_user.get_id())
     post_user = Post.query.get(pid).userId
     if user_id == post_user:
@@ -171,14 +171,15 @@ def comment_put(cid):
 
 @post_routes.route("/<int:id>/comments/<int:cid>", methods=["DELETE"])
 @login_required
-def comment_delete(cid):
+def comment_delete(id, cid):
     old_comment = Comment.query.get(cid)
     user_id = int(current_user.get_id())
     comment_user = Comment.query.get(cid).userId
     if user_id == comment_user:
         db.session.delete(old_comment)
         db.session.commit()
-    return old_comment
+        return {"status": 200}
+    return {"status": 400}
 
 
 # POST /api/post/:id/likes

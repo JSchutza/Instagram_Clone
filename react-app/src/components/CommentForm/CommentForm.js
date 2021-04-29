@@ -3,22 +3,27 @@ import React, { useState } from 'react';
 import { thunk_addComment } from '../../store/comment';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFlwrPosts } from '../../store/post';
+
+
+
 const CommentForm = ({postId}) => {
   const [ bodyText, setBodyText ] = useState("");
   const dispatch = useDispatch();
+
   const submitComment = (event) => {
       event.preventDefault();
-      const payload = { 
+      const payload = {
           bodyText,
           postId
-      } 
+      }
       dispatch(thunk_addComment(payload))
       dispatch(getFlwrPosts())
   }
+
+
+
   return (
     <>
-
-
     <form  className='' onSubmit={submitComment}>
 
     <label>
