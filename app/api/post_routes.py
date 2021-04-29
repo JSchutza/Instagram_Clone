@@ -121,10 +121,15 @@ def post_post():
         return {"url": url}
     return {"message": "poop"}
 
-@post_routes.route("/", methods=["PUT"])
+@post_routes.route("/<int:pid>", methods=["PUT"])
 @login_required
-def post_put():
-    pass
+def post_put(pid):
+    old_post = Post.query.get(pid)
+    form = request.form
+    old_post.update(caption=form["caption"])
+    db.session.commit()
+    return old_post.to_dict()
+
 
 
 @post_routes.route("/<int:pid>", methods=["DELETE"])
@@ -166,7 +171,7 @@ def comment_put(cid):
     form = request.form
     old_comment.update(body=form["body"])
     db.session.commit()
-    return old_comment
+    return old_comment.to_dict()
 
 
 @post_routes.route("/<int:id>/comments/<int:cid>", methods=["DELETE"])
