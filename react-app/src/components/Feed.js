@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFlwrPosts } from "../store/post";
-
+import CommentForm from '../components/CommentForm'
 
 const Feed = () => {
 
@@ -9,11 +9,11 @@ const Feed = () => {
     const dispatch = useDispatch()
     const posts = useSelector((store) => store.postReducer)
 
-
     useEffect(() => {
         dispatch(getFlwrPosts())
         setLoaded(true);
-    },[])
+    },[dispatch])
+
 
 
 
@@ -47,6 +47,7 @@ const Feed = () => {
                                 <li key={comment.id}> {comment.body} </li>
                             </ul>
                         ))}
+                    <CommentForm postId={post.id}/>
                     </div>
 
                     <div>

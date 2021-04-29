@@ -4,7 +4,7 @@ import os
 from flask import Blueprint, redirect, request
 from app.models import Post, User, db, Comment, Like
 from flask_login import login_required, current_user
-from app.forms import CreatePostForm
+from app.forms import CreatePostForm, CreateCommentForm
 from werkzeug.datastructures import CombinedMultiDict
 
 
@@ -144,15 +144,19 @@ def post_delete(pid):
     return {'message': 'success'}
 
 
-@post_routes.route("/<int:id>", methods=["POST"])
+@post_routes.route("/<int:pid>/comments", methods=["POST"])
 @login_required
 def comment_post(pid):
     user_id = int(current_user.get_id())
-    form = request.form
-    new_comment = Comment(userId=user_id, postId=pid, body=form["body"])
-    db.session.add(new_comment)
-    db.session.commit()
-    return new_comment
+    form = CreateCommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print(form.data)
+        new_comment = Comment(userId=user_id, postId=pid, body=form.data["body"])
+        db.session.add(new_comment)
+        db.session.commit()
+        return {new_comment.to_dict()['id']: new_comment.to_dict()}
+    return {'message': 'errors'}
 
 
 @post_routes.route("/<int:id>/comments/<int:cid>", methods=["PUT"])
