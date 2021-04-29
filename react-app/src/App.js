@@ -52,9 +52,9 @@ function App() {
           <UserProfile/>
         </ProtectedRoute>
 
-        <Route path='/search'>
+        <ProtectedRoute path='/search'>
           <SearchPage/>
-        </Route>
+        </ProtectedRoute>
 
 
       </Switch>

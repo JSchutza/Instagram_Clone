@@ -1,4 +1,58 @@
-.stuff{
-    background-color: black;
-    height: 20px;
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap');
+
+
+.image{
+    display: flex;
+    object-fit: fill;
+    width: 600px;
+    height: 600px;
+    object-fit: cover;
+    padding: 0;
+    margin: 0;
+}
+
+.imageContainer{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1;
+    box-sizing: border-box;
+    width: 400px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    font-size: 12px
+}
+
+.outerContainer{
+    background-color: white;
+}
+
+.username{
+  
+   font-weight: bolder;
+}
+
+.caption {
+    display: flex;
+    justify-content: center;
+    margin-left: 37px;
+}
+
+.bold{
+    font-weight: bold;
+    font-style: italic;
+   
+}
+
+.indContainer{
+    border-style: solid;
+    border-width: .5px;
+}
+
+.titleUsername {
+    margin: 20px;
+    margin-left: 10px;
+    font-size: 16px;
 }

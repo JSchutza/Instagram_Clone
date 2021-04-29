@@ -30,25 +30,26 @@ const Feed = () => {
     } else {
 
         return (
-            <>
-            <div>
+            <div className={styles.outerContainer}>
+            <div className={styles.imageContainer}>
                     { Object.values(posts).map(post => (
-                    <>
-                    <div>
-                        {post.username}
+                    <div className={styles.indContainer}>
+                            <span className={styles.titleUsername}>{post.username}</span>
+                    
+                        <img className={styles.image} src={post.url} key={post.id} />
+                    
+                      <div >
+                        {post.likes.length === 1 ? <p> {post.likes.length} like </p> : <p>{post.likes.length} likes </p> }
                     </div>
+
                     <div>
-                        <img src={post.url} key={post.id} />
+                                <p className={styles.caption}> <span className={styles.username}> {post.username} </span> {post.caption} </p>
                     </div>
 
                     <div>
-                        <p> {post.caption} </p>
-                    </div>
-
-                    <div className={styles.stuff}>
                         {post.comments.map(comment => (
                             <ul>
-                                <li key={comment.id}> {comment.body} </li>
+                                <p key={comment.id}> <span className={styles.bold}>{comment.username}</span>   {comment.body} </p>
                                 { comment.userId === user.id ? <DeleteCommentButton postId={post.id} commentId ={comment.id} /> : <p></p> }
                             </ul>
                         ))}
@@ -57,16 +58,12 @@ const Feed = () => {
                     </div>
 
 
-                    <div>
-                        {post.likes.length === 1 ? <p> {post.likes.length} like </p> : <p>{post.likes.length} likes </p> }
+
                     </div>
-
-
-
-                    </>
                 ))}
+             
             </div>
-            </>
+            </div>
         )
     }
 
