@@ -49,7 +49,7 @@ post_routes = Blueprint("posts", __name__)
 @post_routes.route("")
 @login_required
 def posts():
-    user_id = current_user.get_id()
+    user_id = int(current_user.get_id())
     # user = User.query.get(3)
     user = User.query.get(user_id)
     result = []
@@ -64,6 +64,14 @@ def posts():
         return "no posts found"
     return {"posts": [post.to_dict() for post in result]}
 
+
+@post_routes.route("/user/<int:uid>")
+@login_required
+def user_posts(uid):
+    user_id = uid
+    posts = Post.query.filter(Post.userId == user_id)
+    
+    return {"posts": [post.to_dict() for post in posts]}
 
 @post_routes.route("/<int:id>")
 def post(id):
@@ -101,7 +109,7 @@ def post_post():
     url = upload["url"]
     # flask_login allows us to get the current user from the request
 
-    new_image = Post(userId=current_user.get_id(), url=url, caption=form["caption"])
+    new_image = Post(userId=int(current_user.get_id()), url=url, caption=form["caption"])
 
     db.session.add(new_image)
     db.session.commit()
@@ -114,32 +122,29 @@ def post_put():
     pass
 
 
-@post_routes.route("/<int:id>", methods=["DELETE"])
+@post_routes.route("/<int:pid>", methods=["DELETE"])
 @login_required
-def post_delete(id):
+def post_delete(pid):
     
-    user_id = current_user.get_id()
-    
-    post_user = Post.query.get(id).userId
-    
+    user_id = int(current_user.get_id())
+    post_user = Post.query.get(pid).userId
     if user_id == post_user:
-        post_url = Post.query.get(id).url
+        post_url = Post.query.get(pid).url
         key = post_url[33:]
         if post_url.startswith(S3_LOCATION):
             s3.delete_object(Bucket=BUCKET_NAME, Key=key)
-        post = Post.query.get(id)
-        post.delete()
+        post = Post.query.get(pid)
+        db.session.delete(post)
         db.session.commit()
-       
     return {'message': 'success'}
 
 
 @post_routes.route("/<int:id>", methods=["POST"])
 @login_required
-def comment_post(id):
-    user_id = current_user.get_id()
+def comment_post(pid):
+    user_id = int(current_user.get_id())
     form = request.form
-    new_comment = Comment(userId=user_id, postId=id, body=form["body"])
+    new_comment = Comment(userId=user_id, postId=pid, body=form["body"])
     db.session.add(new_comment)
     db.session.commit()
     return new_comment
@@ -159,7 +164,7 @@ def comment_put(cid):
 @login_required
 def comment_delete(cid):
     old_comment = Comment.query.get(cid)
-    user_id = current_user.get_id()
+    user_id = int(current_user.get_id())
     comment_user = Comment.query.get(cid).userId
     if user_id == comment_user:
         db.session.delete(old_comment)
@@ -174,7 +179,7 @@ def comment_delete(cid):
 @post_routes.route("/<int:id>/likes", methods=["POST"])
 @login_required
 def like_post(id):
-    user_id = current_user.get_id()
+    user_id = int(current_user.get_id())
     new_like = Like(userId=user_id, postId=id)
     db.session.add(new_like)
     db.session.commit()
@@ -183,13 +188,6 @@ def like_post(id):
 
 
 @post_routes.route('/<int:id>/likes/<int:lid>', methods=['DELETE'])
-
-
-@post_routes.route("/<int:id>/likes/<int:lid>", methods=["DELETE"])
-
-@post_routes.route('/<int:id>/likes/<int:lid>', methods=['DELETE'])
-
-
 @login_required
 def like_delete(lid):
     old_like = Like.query.get(lid)
