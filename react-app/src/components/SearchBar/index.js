@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
+import {useDispatch} from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { searchPop } from '../../store/search'
+
 
 
 function SearchBar() {
     const [query, setQuery] = useState('')
-    history = useHistory()
+    const history = useHistory()
+    const dispatch = useDispatch()
 
     async function search() {
-        const response = await fetch(`/api/search?q=${query}`)
-        const result = await response.json();
-        
+        dispatch(searchPop(query))
+        history.push('/search')
     }
     
 
@@ -20,3 +23,5 @@ function SearchBar() {
         </>
     )
 }
+
+export default SearchBar;

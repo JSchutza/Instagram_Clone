@@ -2,11 +2,13 @@ import {createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from 'redux-thunk';
 import session, { getFollowersReducer } from './session'
 import postReducer from './post';
+import searchReducer from './search'
 
 const rootReducer = combineReducers({
     session,
     getFollowersReducer,
-    postReducer
+    postReducer,
+    searchReducer
 });
 
 

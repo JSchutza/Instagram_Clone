@@ -5,19 +5,19 @@ import './index.css';
 import App from './App';
 import configureStore from './store'
 import {ModalProvider} from './context/Modal'
-import {UpdootProvider} from './context/updoot'
+import {SearchProvider} from './context/search'
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <UpdootProvider>
+    <SearchProvider>
       <ModalProvider>
         <Provider store={store}>
           <App />
         </Provider>
       </ModalProvider>
-    </UpdootProvider>
+    </SearchProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
