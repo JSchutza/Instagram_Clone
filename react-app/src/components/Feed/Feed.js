@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFlwrPosts } from "../store/post";
-import CommentForm from '../components/CommentForm'
-import DeleteCommentButton from '../components/DeleteCommentButton';
+import { getFlwrPosts } from "../../store/post";
+import CommentForm from '../CommentForm'
+import DeleteCommentButton from '../DeleteCommentButton';
+import styles from './Feed.module.css';
 
 const Feed = () => {
 
@@ -44,7 +45,7 @@ const Feed = () => {
                         <p> {post.caption} </p>
                     </div>
 
-                    <div>
+                    <div className={styles.stuff}>
                         {post.comments.map(comment => (
                             <ul>
                                 <li key={comment.id}> {comment.body} </li>
