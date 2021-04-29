@@ -98,6 +98,13 @@ export const thunk_getFollowers = () => async (dispatch) => {
     dispatch(getFollowers(data))
 }
 
+export const resetUser = () => async (dispatch) => {
+
+    const response = await fetch(`/api/users/reset`, {credentials: 'include'})
+    const data = await response.json();
+
+    dispatch(setUser(data))
+}
 
 
 
