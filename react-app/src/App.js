@@ -5,9 +5,10 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import User from "./components/User/User";
 import Feed from "./components/Feed"
-import CreatePost from "./components/CreatePost";
+import UserProfile from './components/UserProfile'
 
 import { authenticate } from "./store/session";
+import SearchPage from "./components/SearchPage";
 
 
 
@@ -41,10 +42,20 @@ function App() {
           <h1>Feed</h1>
           <Feed />
         </ProtectedRoute>
-
+      
         <ProtectedRoute path="/profile" exact={true} >
           <User />
         </ProtectedRoute>
+
+
+        <ProtectedRoute path="/profile/:id">
+          <UserProfile/>
+        </ProtectedRoute>
+
+        <Route path='/search'>
+          <SearchPage/>
+        </Route>
+
 
       </Switch>
     </BrowserRouter>
