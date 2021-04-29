@@ -2,11 +2,13 @@
 const GET_FOLLOWERS_POSTS = 'post/GET_FOLLOWERS_POSTS'
 const GET_USER_POSTS = 'post/GET_USER_POST'
 const DELETE_POST = 'post/DELETE_POST'
-
+const CLEAR_POSTS = 'post/CLEAR_POSTS'
 
 
 // action creators
-
+export const clearPosts = () => ({
+    type: CLEAR_POSTS
+})
 
 
 const getFollowersPosts = (posts) => ({
@@ -28,7 +30,7 @@ const removePost = (post) => {
 };
 
 export const deletePost = (post) => async (dispatch) => {
-    const response = await fetch(`/api/posts/${post.id}`, { 
+    const response = await fetch(`/api/posts/${post.id}`, {
         method: 'DELETE',
         credentials: 'include'
     })
@@ -78,13 +80,16 @@ export default function postReducer(state = {}, action) {
 
             return { ...state, ...allPosts };
         case GET_USER_POSTS:
-        
+
             const userPosts = {}
             action.payload.posts.forEach(eachPost =>{
                 userPosts[eachPost.id] = eachPost
             });
 
             return { ...state, ...userPosts };
+
+        case CLEAR_POSTS:
+            return {};
 
         case DELETE_POST:
             const pid = action.payload.id
