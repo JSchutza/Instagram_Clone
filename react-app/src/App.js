@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import User from "./components/User/User";
@@ -42,15 +42,10 @@ function App() {
           <Feed />
         </ProtectedRoute>
 
-        <ProtectedRoute path="/users/:userId" exact={true} >
-        </ProtectedRoute>
-        <Route path="/profile" exact={true} >
+        <ProtectedRoute path="/profile" exact={true} >
           <User />
-        </Route>
+        </ProtectedRoute>
 
-        <Route path="/test" exact={true}>
-          <CreatePost />
-        </Route>
       </Switch>
     </BrowserRouter>
   );
