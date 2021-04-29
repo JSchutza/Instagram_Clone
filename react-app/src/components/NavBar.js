@@ -5,7 +5,9 @@ import LogoutButton from './auth/LogoutButton';
 import LoginFormModal from './LoginFormModal';
 import SignupFormModal from './SignupFormModal';
 import CreatePostModal from './CreatePost';
+import SearchBar from './SearchBar';
 import { clearPosts } from '../store/post'
+
 
 
 
@@ -48,6 +50,7 @@ const NavBar = () => {
           <NavLink to="/" exact={true} activeClassName="active" onClick={() => resetPosts()}>
             Home
           </NavLink>
+          <SearchBar/>
         </li>
         <li>
           {sessionLinks}
