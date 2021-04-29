@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import LogoutButton from './auth/LogoutButton';
 import LoginFormModal from './LoginFormModal';
 import SignupFormModal from './SignupFormModal';
+import CreatePostModal from './CreatePost';
 
 
 
@@ -16,6 +17,7 @@ const NavBar = () => {
     sessionLinks = (
       <>
         <LogoutButton />
+        <CreatePostModal/>
       </>
     );
   } else {

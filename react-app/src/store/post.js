@@ -1,11 +1,19 @@
+
 const GET_FOLLOWERS_POSTS = 'post/GET_FOLLOWERS_POSTS'
 const GET_USER_POSTS = 'post/GET_USER_POST'
 const DELETE_POST = 'post/DELETE_POST'
+
+
+
+// action creators
+
+
 
 const getFollowersPosts = (posts) => ({
     type: GET_FOLLOWERS_POSTS,
     payload: posts
 })
+
 
 const getUserPosts = (posts) => ({
     type: GET_USER_POSTS,
@@ -43,6 +51,7 @@ export const getFlwrPosts = () => async (dispatch) => {
     dispatch(getFollowersPosts(data))
 };
 
+
 export const getUsrPosts = (id) => async (dispatch) => {
     const response = await fetch(`api/posts/user/${id}`, {
         headers: {
@@ -61,7 +70,7 @@ export const getUsrPosts = (id) => async (dispatch) => {
 export default function postReducer(state = {}, action) {
     switch (action.type) {
         case GET_FOLLOWERS_POSTS:
-            
+
             const allPosts = {}
             action.payload.posts.forEach(eachPost =>{
                 allPosts[eachPost.id] = eachPost
