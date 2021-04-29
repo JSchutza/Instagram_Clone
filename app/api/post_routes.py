@@ -195,14 +195,14 @@ def like_post(id):
     new_like = Like(userId=user_id, postId=id)
     db.session.add(new_like)
     db.session.commit()
-    return new_like
+    return new_like.to_dict()
 
 
 
 @post_routes.route('/<int:id>/likes/<int:lid>', methods=['DELETE'])
 @login_required
-def like_delete(lid):
+def like_delete(id, lid):
     old_like = Like.query.get(lid)
     db.session.delete(old_like)
     db.session.commit()
-    return old_like
+    return old_like.to_dict()
