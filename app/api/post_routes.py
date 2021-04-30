@@ -120,12 +120,7 @@ def post_post():
     return {"message": "error creating a post. "}
 
 
-<<<<<<< HEAD
 @post_routes.route("/", methods=["PUT"])
-=======
-
-@post_routes.route("/<int:pid>", methods=["PUT"])
->>>>>>> main
 @login_required
 def post_put(pid):
     post = Post.query.get(pid)
