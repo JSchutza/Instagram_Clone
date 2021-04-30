@@ -8,8 +8,12 @@ import EditFormModal from '../EditModal'
 const Picture = ({ setShowModal, post }) => {
   const [like, setLike] = useState('Like')
   const [lid, setLid] = useState('')
+  const [editComment, setEditComment] = useState(-1)
+  const [editVal, setEditVal] = useState('')
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+
+  const resetEdit = () => setEditComment(-1)
 
   const del = (post) => {
     dispatch(deletePost(post));
@@ -49,7 +53,7 @@ const Picture = ({ setShowModal, post }) => {
       )}
       <h3>{post.caption}</h3>
       {post.comments.map((comment) => (
-        <>
+          <>
         <p key={comment.id}>{comment.body}</p>
          { comment.id !== editComment && comment.userId === user.id && <a onClick={() => setEditComment(comment.id)}>Edit</a> }
          { comment.id === editComment &&

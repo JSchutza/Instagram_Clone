@@ -4,21 +4,23 @@ import { getFlwrPosts } from "../../store/post";
 import CommentForm from '../CommentForm'
 import DeleteCommentButton from '../DeleteCommentButton';
 import styles from './Feed.module.css';
+import EditCommentButton from '../EditCommentButton';
 
 const Feed = () => {
 
     const [loaded, setLoaded] = useState(false);
+    const [editComment, setEditComment] = useState(-1)
+    const [editVal, setEditVal] = useState('')
     const dispatch = useDispatch()
     const posts = useSelector((store) => store.postReducer)
     const user = useSelector((store) => store.session.user)
 
+    const resetEdit = () => setEditComment(-1)
 
     useEffect(() => {
         dispatch(getFlwrPosts())
         setLoaded(true);
     },[dispatch])
-
-
 
 
     if (!loaded || posts === null) {
@@ -36,7 +38,7 @@ const Feed = () => {
                     <div className={styles.indContainer}>
                             <span className={styles.titleUsername}>{post.username}</span>
                     
-                        <img className={styles.image} src={post.url} key={post.id} />
+                        <img alt='post'className={styles.image} src={post.url} key={post.id} />
                     
                       <div >
                         {post.likes.length === 1 ? <p> {post.likes.length} like </p> : <p>{post.likes.length} likes </p> }
@@ -58,7 +60,6 @@ const Feed = () => {
                                  <EditCommentButton resetEdit={resetEdit} editVal={editVal} commentId={comment.id} bool={false}/>  
                                 </>
                                 }
-
                             </ul>
                                 )
                         )}
