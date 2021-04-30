@@ -6,12 +6,29 @@ body{
 }
 
 
+li {
+    list-style: none;
+}
+
+
 a {
     text-decoration: none;
+    color:blue;
 }
 
 
 a:hover {
     color: red;
     cursor: pointer;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+nav {
+    background: #222;
+    padding: 0 15px;
 }
