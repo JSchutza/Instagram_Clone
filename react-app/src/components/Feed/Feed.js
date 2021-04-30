@@ -49,10 +49,6 @@ const Feed = () => {
                     <div>
                         {post.comments.map(comment => (
                             <ul>
-<<<<<<< HEAD
-                                <p key={comment.id}> <span className={styles.bold}>{comment.username}</span>   {comment.body} </p>
-                                { comment.userId === user.id ? <DeleteCommentButton postId={post.id} commentId ={comment.id} /> : <p></p> }
-=======
                                 <p key={comment.id}> <span className={styles.bold}>{comment.username}</span>   {comment.body}</p>
                                 { comment.userId === user.id ? <DeleteCommentButton postId={post.id} commentId={comment.id}/> : <p></p> }
                                 { comment.id !== editComment && comment.userId === user.id && <a onClick={() => setEditComment(comment.id)}>Edit</a> }
@@ -62,7 +58,7 @@ const Feed = () => {
                                  <EditCommentButton resetEdit={resetEdit} editVal={editVal} commentId={comment.id} bool={false}/>  
                                 </>
                                 }
->>>>>>> edit_comments
+
                             </ul>
                                 )
                         )}
