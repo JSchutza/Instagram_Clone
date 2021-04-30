@@ -3,6 +3,7 @@ const GET_FOLLOWERS_POSTS = 'post/GET_FOLLOWERS_POSTS'
 const GET_USER_POSTS = 'post/GET_USER_POST'
 const DELETE_POST = 'post/DELETE_POST'
 const CLEAR_POSTS = 'post/CLEAR_POSTS'
+const EDIT_POST = 'post/EDIT_POST'
 
 
 // action creators
@@ -29,6 +30,10 @@ const removePost = (post) => {
     };
 };
 
+const editPosts = (post) => ({
+    type: EDIT_POST,
+    payload: post
+})
 
 export const deletePost = (post) => async (dispatch) => {
     const response = await fetch(`/api/posts/${post.id}`, {
@@ -70,6 +75,15 @@ export const getUsrPosts = (id) => async (dispatch) => {
     dispatch(getUserPosts(data))
 };
 
+export const editPost = (form) => async (dispatch) => {
+    const response = await fetch(`/api/posts/${form.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(form)
+    })
+    const new_post = await response.json()
+    dispatch(editPosts(new_post))
+}
+
 export default function postReducer(state = {}, action) {
     switch (action.type) {
         case GET_FOLLOWERS_POSTS:
@@ -96,6 +110,12 @@ export default function postReducer(state = {}, action) {
             const pid = action.payload.id
             delete state[pid]
             return {...state}
+        
+        case EDIT_POST:
+            const pid2 = action.payload.id
+            const newS = {...state}
+            newS[pid2] = action.payload
+            return newS
 
         default:
             return state;

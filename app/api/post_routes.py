@@ -120,10 +120,25 @@ def post_post():
     return {"message": "error creating a post. "}
 
 
+<<<<<<< HEAD
 @post_routes.route("/", methods=["PUT"])
+=======
+
+@post_routes.route("/<int:pid>", methods=["PUT"])
+>>>>>>> main
 @login_required
-def post_put():
-    pass
+def post_put(pid):
+    post = Post.query.get(pid)
+    byteString = request.data
+    dictString = byteString.decode('UTF-8')
+    data = ast.literal_eval(dictString)
+    # print('***************** DATA *************************',data)
+    # print('**************** FORM *********************', dir(request.data))
+    post.caption = data['caption']
+    # print(post.to_dict())
+    db.session.add(post)
+    db.session.commit()
+    return post.to_dict()
 
 
 @post_routes.route("/<int:pid>", methods=["DELETE"])

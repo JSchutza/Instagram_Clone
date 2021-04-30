@@ -2,7 +2,11 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect} from "react";
 import "./Picture.css";
 import { deletePost, getUsrPosts } from "../../store/post";
+<<<<<<< HEAD
 import EditCommentButton from '../EditCommentButton';
+=======
+import EditFormModal from '../EditModal'
+>>>>>>> main
 
 const Picture = ({ setShowModal, post }) => {
   const [like, setLike] = useState('Like')
@@ -68,6 +72,7 @@ const Picture = ({ setShowModal, post }) => {
       {user.id === post.userId && (
         <>
           <button>Edit</button>
+          <EditFormModal post={post}/>
           <button onClick={() => del(post)}>Delete</button>
         </>
       )}
