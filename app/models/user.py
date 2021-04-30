@@ -18,7 +18,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     posts = db.relationship("Post", backref="users", cascade="all, delete")
     likes = db.relationship("Like", backref="users", cascade="all, delete")
-    comments = db.relationship("Comment", backref="users", cascade="all, delete")
+    comments = db.relationship(
+        "Comment", backref="users", cascade="all, delete")
     followers = db.relationship(
         "User",
         secondary=follower_to_followee,

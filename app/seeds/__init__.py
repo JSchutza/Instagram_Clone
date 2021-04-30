@@ -10,8 +10,6 @@ from .follows import seed_follows, undo_follows
 seed_commands = AppGroup('seed')
 
 
-
-
 # Creates the `flask seed all` command
 @seed_commands.command('all')
 def seed():

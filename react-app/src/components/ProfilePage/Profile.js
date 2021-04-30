@@ -5,24 +5,23 @@ import PictureModal from "../PictureModal/Picture";
 import { Modal } from "../../context/Modal";
 import { getUsrPosts } from "../../store/post";
 
-
 function Profile() {
   const [showModal, setShowModal] = useState(-1);
 
   const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const user = useSelector((store) => store.session.user);
 
   useEffect(() => {
-    dispatch(getUsrPosts(user.id))
+    dispatch(getUsrPosts(user.id));
     setLoaded(true);
-  },[])
+  }, []);
 
-  const posts = useSelector((store) => store.postReducer)
+  const posts = useSelector((store) => store.postReducer);
 
-  const userPosts = Object.values(posts)
-  Object.values(posts).forEach(post => console.log(post.userId))
-  console.log(userPosts)
+  const userPosts = Object.values(posts);
+  Object.values(posts).forEach((post) => console.log(post.userId));
+  console.log(userPosts);
   return (
     <>
       <div className="image-container">
@@ -35,8 +34,12 @@ function Profile() {
               src={post.url}
             />
             {showModal === post.id && (
-              <Modal  onClose={() => setShowModal(-1)}>
-                <PictureModal setShowModal={setShowModal} post={post} onClose={() => setShowModal(-1)} />
+              <Modal onClose={() => setShowModal(-1)}>
+                <PictureModal
+                  setShowModal={setShowModal}
+                  post={post}
+                  onClose={() => setShowModal(-1)}
+                />
               </Modal>
             )}
           </div>

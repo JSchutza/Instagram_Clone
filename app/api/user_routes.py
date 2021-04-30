@@ -22,7 +22,6 @@ def user(id):
     return user.to_dict()
 
 
-
 @user_routes.route('/followers')
 @login_required
 def followers():
@@ -31,26 +30,28 @@ def followers():
     user_data = user.to_dict()
     followers_array = user_data["followers"]
 
-    normalized_data = { followers_array[each]: User.query.get(followers_array[each]).username
-                        for each in range(len(followers_array)) }
+    normalized_data = {followers_array[each]: User.query.get(followers_array[each]).username
+                       for each in range(len(followers_array))}
 
-    return { "username": user.username, "id": user.id, "followers": normalized_data }
+    return {"username": user.username, "id": user.id, "followers": normalized_data}
+
 
 @user_routes.route('/follow')
 @login_required
 def follow():
     userId1 = int(current_user.get_id())
     userId2 = int(request.args['userId2'])
-    
+
     user1 = User.query.get(userId1)
     user2 = User.query.get(userId2)
-    
+
     if user2 in user1.followers:
         user1.followers.remove(user2)
     else:
         user1.followers.append(user2)
     db.session.commit()
     return '200'
+
 
 @user_routes.route('/reset')
 @login_required
