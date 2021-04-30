@@ -1,7 +1,24 @@
 
 
 
+.home_wrapper{
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    
+}
 
-.navbar_wrapper {
+.home_image{
 
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.inner_wrapper{
+  padding: 20px
+}
+
+.login_text{
+    margin-left: 50px;
 }

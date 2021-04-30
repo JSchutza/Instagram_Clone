@@ -22,7 +22,8 @@
     margin-left: auto;
     margin-right: auto;
     background-color: white;
-    font-size: 12px
+    font-size: 12px;
+    padding: 20px
 }
 
 .outerContainer{
@@ -37,7 +38,7 @@
 .caption {
     display: flex;
     justify-content: center;
-    margin-left: 37px;
+    /* margin-left: 37px; */
 }
 
 .bold{
@@ -52,7 +53,7 @@
 }
 
 .titleUsername {
-    margin: 20px;
-    margin-left: 10px;
+    /* margin: 20px; */
+    /* margin-left: 10px; */
     font-size: 16px;
 }

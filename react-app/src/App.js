@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -16,7 +16,7 @@ import styles from "./app.module.css"
 function App() {
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false);
-
+  const user = useSelector((store) => store.session.user)
 
 
   useEffect(() => {
@@ -32,6 +32,21 @@ function App() {
     return null;
   }
 
+  if (user == null) {
+    return (
+       <BrowserRouter>
+       <div className={styles.home_wrappper}>
+      <div className={styles.navbar_wrapper}>
+      <NavBar />
+      </div>
+      <div className={styles.inner_wrapper}>
+      <p className={styles.login_text}>Please login or sign-up to get started</p>
+      <img className={styles.home_image} src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flooxcie.com%2Fwp-content%2Fuploads%2F2019%2F02%2Fbest-camera-for-instagram-guide.jpg&f=1&nofb=1'></img>
+          </div>
+        </div>
+      </BrowserRouter>
+    )
+  }
 
 
   return (
@@ -43,7 +58,7 @@ function App() {
 
       <Switch>
         <ProtectedRoute path="/" exact={true}>
-          <h1>Feed</h1>
+          
           <Feed />
         </ProtectedRoute>
         <ProtectedRoute path="/profile" exact={true} >
