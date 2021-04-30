@@ -58,7 +58,7 @@ function App() {
 
       <Switch>
         <ProtectedRoute path="/" exact={true}>
-          <h1>Feed</h1>
+          
           <Feed />
         </ProtectedRoute>
         <ProtectedRoute path="/profile" exact={true} >
