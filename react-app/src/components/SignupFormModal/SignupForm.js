@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
+import styles from './signupform.module.css'
+
+
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
@@ -38,10 +41,14 @@ const SignUpForm = () => {
     return <Redirect to="/" />;
   }
 
+
+
   return (
+    <div className={styles.signup_wrapper}>
     <form onSubmit={onSignUp}>
       <div>
         <label>User Name</label>
+          <br />
         <input
           type="text"
           name="username"
@@ -51,6 +58,7 @@ const SignUpForm = () => {
       </div>
       <div>
         <label>Email</label>
+          <br />
         <input
           type="text"
           name="email"
@@ -60,6 +68,7 @@ const SignUpForm = () => {
       </div>
       <div>
         <label>Password</label>
+          <br />
         <input
           type="password"
           name="password"
@@ -69,6 +78,7 @@ const SignUpForm = () => {
       </div>
       <div>
         <label>Repeat Password</label>
+          <br />
         <input
           type="password"
           name="repeat_password"
@@ -79,6 +89,7 @@ const SignUpForm = () => {
       </div>
       <button type="submit">Sign Up</button>
     </form>
+    </div>
   );
 };
 
