@@ -4,3 +4,13 @@
   position: relative;
   left: 20%;
 }
+
+
+
+
+.login_wrapper {
+  display: flex;
+  position: relative;
+  width: auto;
+  padding: 5%;
+}
