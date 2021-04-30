@@ -4,3 +4,14 @@ body{
     font-family: 'JetBrains Mono', monospace;
     background-color: rgb(254, 254, 254);
 }
+
+
+a {
+    text-decoration: none;
+}
+
+
+a:hover {
+    color: red;
+    cursor: pointer;
+}

@@ -1,0 +1,46 @@
+
+
+
+.nav_div {
+  background-color: #000;
+
+}
+
+
+.nav_div_logoutbutton {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  list-style: none;
+}
+
+
+.nav_div_createpostbutton {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+  list-style: none;
+}
+
+
+.nav_div_profile_link {
+  display: flex;
+  justify-content: start;
+  padding: 10px;
+  list-style: none;
+}
+
+
+.nav_div_home_link {
+  display: flex;
+  justify-content: start;
+  padding: 10px;
+  list-style: none;
+}
+
+
+.nav_div_search_bar {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+}
