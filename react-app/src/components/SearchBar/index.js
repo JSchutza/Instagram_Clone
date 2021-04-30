@@ -14,7 +14,7 @@ function SearchBar() {
         dispatch(searchPop(query))
         history.push('/search')
     }
-
+    
 
     return (
         <>
