@@ -120,7 +120,6 @@ def post_post():
     return {"message": "error creating a post. "}
 
 
-
 @post_routes.route("/<int:pid>", methods=["PUT"])
 @login_required
 def post_put(pid):
@@ -162,7 +161,8 @@ def comment_post(pid):
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         print(form.data)
-        new_comment = Comment(userId=user_id, postId=pid, body=form.data["body"])
+        new_comment = Comment(userId=user_id, postId=pid,
+                              body=form.data["body"])
         db.session.add(new_comment)
         db.session.commit()
         return {new_comment.to_dict()["id"]: new_comment.to_dict()}
