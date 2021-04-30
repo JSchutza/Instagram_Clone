@@ -46,7 +46,7 @@ const SignUpForm = () => {
   return (
     <div className={styles.signup_wrapper}>
     <form onSubmit={onSignUp}>
-      <div>
+        <div className={styles.signup_input_div}>
         <label>User Name</label>
           <br />
         <input
@@ -56,7 +56,7 @@ const SignUpForm = () => {
           value={username}
         ></input>
       </div>
-      <div>
+        <div className={styles.signup_input_div}>
         <label>Email</label>
           <br />
         <input
@@ -66,7 +66,7 @@ const SignUpForm = () => {
           value={email}
         ></input>
       </div>
-      <div>
+        <div className={styles.signup_input_div}>
         <label>Password</label>
           <br />
         <input
@@ -76,7 +76,7 @@ const SignUpForm = () => {
           value={password}
         ></input>
       </div>
-      <div>
+        <div className={styles.signup_input_div}>
         <label>Repeat Password</label>
           <br />
         <input

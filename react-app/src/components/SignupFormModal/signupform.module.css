@@ -12,3 +12,12 @@
   width: auto;
   padding: 5%;
 }
+
+
+
+.signup_input_div {
+  position: relative;
+  width: auto;
+  display: flex;
+  padding: 3%;
+}
