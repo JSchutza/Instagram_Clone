@@ -9,6 +9,8 @@ from app.forms import CreatePostForm, CreateCommentForm
 from werkzeug.datastructures import CombinedMultiDict
 
 
+
+
 s3 = boto3.client(
     "s3",
     aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
@@ -55,6 +57,7 @@ def posts():
     user = User.query.get(user_id)
     result = []
 
+
     for follower in user.followers:
         for post in Post.query.filter(Post.userId == follower.id):
             result.append(post)
@@ -73,7 +76,6 @@ def user_posts(uid):
 
     return {"posts": [post.to_dict() for post in posts]}
 
-
 @post_routes.route("/<int:id>")
 def post(id):
     post = Post.query.get(id)
@@ -87,7 +89,7 @@ def post(id):
 def post_post():
 
     form = CreatePostForm(CombinedMultiDict((request.files, request.form)))
-    form["csrf_token"].data = request.cookies["csrf_token"]
+    form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         # print(form.data, "------------------------------------------ \n")
@@ -101,18 +103,19 @@ def post_post():
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
 
+
+
         if "url" not in upload:
             # if the dictionary doesn't have a url key
             # it means that there was an error when we tried to upload
             # so we send back that error message
             return upload, 400
 
+
         url = upload["url"]
         # flask_login allows us to get the current user from the request
 
-        new_image = Post(
-            userId=current_user.get_id(), url=url, caption=form.data["caption"]
-        )
+        new_image = Post(userId=current_user.get_id(), url=url, caption=form.data["caption"])
 
         db.session.add(new_image)
         db.session.commit()
@@ -120,12 +123,8 @@ def post_post():
     return {"message": "error creating a post. "}
 
 
-<<<<<<< HEAD
-@post_routes.route("/", methods=["PUT"])
-=======
 
 @post_routes.route("/<int:pid>", methods=["PUT"])
->>>>>>> e82f98b424edd2464a78cf88b52bbce9c35110ec
 @login_required
 def post_put(pid):
     post = Post.query.get(pid)
@@ -155,7 +154,7 @@ def post_delete(pid):
         post = Post.query.get(pid)
         db.session.delete(post)
         db.session.commit()
-    return {"message": "success"}
+    return {'message': 'success'}
 
 
 @post_routes.route("/<int:pid>/comments", methods=["POST"])
@@ -163,27 +162,24 @@ def post_delete(pid):
 def comment_post(pid):
     user_id = int(current_user.get_id())
     form = CreateCommentForm()
-    form["csrf_token"].data = request.cookies["csrf_token"]
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         print(form.data)
         new_comment = Comment(userId=user_id, postId=pid, body=form.data["body"])
         db.session.add(new_comment)
         db.session.commit()
-        return {new_comment.to_dict()["id"]: new_comment.to_dict()}
-    return {"message": "errors"}
+        return {new_comment.to_dict()['id']: new_comment.to_dict()}
+    return {'message': 'errors'}
 
 
-@post_routes.route("/comments/<int:cid>", methods=["PUT"])
+@post_routes.route("/<int:id>/comments/<int:cid>", methods=["PUT"])
 @login_required
 def comment_put(cid):
-    old_comment = Comment.query.get(int(cid))
-    byte_str = request.data
-    dict_str = byte_str.decode("UTF-8")
-    data = ast.literal_eval(dict_str)
-    old_comment.body = data
-    db.session.add(old_comment)
+    old_comment = Comment.query.get(cid)
+    form = request.form
+    old_comment.update(body=form["body"])
     db.session.commit()
-    return old_comment.to_dict()
+    return old_comment
 
 
 @post_routes.route("/<int:id>/comments/<int:cid>", methods=["DELETE"])
@@ -213,7 +209,8 @@ def like_post(id):
     return new_like.to_dict()
 
 
-@post_routes.route("/<int:id>/likes/<int:lid>", methods=["DELETE"])
+
+@post_routes.route('/<int:id>/likes/<int:lid>', methods=['DELETE'])
 @login_required
 def like_delete(id, lid):
     old_like = Like.query.get(lid)
