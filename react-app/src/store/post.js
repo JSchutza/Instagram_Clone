@@ -45,7 +45,7 @@ export const deletePost = (post) => async (dispatch) => {
 }
 
 export const getFlwrPosts = () => async (dispatch) => {
-    const response = await fetch('api/posts', {
+    const response = await fetch('/api/posts', {
         headers: {
             'Content-Type': 'application/json',
         },
