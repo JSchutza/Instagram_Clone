@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect} from "react";
 import "./Picture.css";
 import { deletePost, getUsrPosts } from "../../store/post";
+import EditCommentButton from '../EditCommentButton';
 import EditFormModal from '../EditModal'
 
 const Picture = ({ setShowModal, post }) => {
@@ -48,7 +49,18 @@ const Picture = ({ setShowModal, post }) => {
       )}
       <h3>{post.caption}</h3>
       {post.comments.map((comment) => (
+        <>
         <p key={comment.id}>{comment.body}</p>
+         { comment.id !== editComment && comment.userId === user.id && <a onClick={() => setEditComment(comment.id)}>Edit</a> }
+         { comment.id === editComment &&
+                <>
+                <input type="text" value={editVal} onChange={e => setEditVal(e.target.value)}/>
+                <EditCommentButton resetEdit={resetEdit} editVal={editVal} commentId={comment.id} bool={post.userId}/>  
+                </>
+                }
+
+          </>   
+
       ))}
       {user.id === post.userId && (
         <>
