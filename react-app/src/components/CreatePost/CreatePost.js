@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 
 
-const CreatePost = ({ icon }) => {
+const CreatePost = () => {
   const [ captionText, setCaptionText ] = useState("");
   const [ img, setImg ] = useState("");
   const [ errors, setErrors ] = useState([]);
@@ -51,7 +51,7 @@ const CreatePost = ({ icon }) => {
     />
     </label>
 
-      <button type='submit' styles={{ backgroundImage: `url(${icon})` }} disabled={!!errors.length}> Create Post </button>
+    <button type='submit' disabled={!!errors.length}> Create Post </button>
 
     </form>
     </>

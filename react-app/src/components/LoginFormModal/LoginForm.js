@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import { login, thunk_allUsers } from "../../store/session";
 
 
-import styles from './loginform.module.css';
+
 
 
 const LoginForm = () => {
@@ -42,16 +42,14 @@ const LoginForm = () => {
 
 
   return (
-    <div className={styles.login_wrapper}>
+    <form onSubmit={onLogin}>
       <div>
         {errors.map((error) => (
           <div>{error}</div>
         ))}
       </div>
-    <form onSubmit={onLogin}>
       <div>
         <label htmlFor="email">Email</label>
-          <br />
         <input
           name="email"
           type="text"
@@ -60,10 +58,8 @@ const LoginForm = () => {
           onChange={updateEmail}
         />
       </div>
-      <br />
       <div>
         <label htmlFor="password">Password</label>
-          <br />
         <input
           name="password"
           type="password"
@@ -71,12 +67,9 @@ const LoginForm = () => {
           value={password}
           onChange={updatePassword}
         />
-
         <button type="submit">Login</button>
       </div>
-      <br />
     </form>
-    </div>
   );
 };
 

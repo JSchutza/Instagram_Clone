@@ -55,8 +55,10 @@ function App() {
       <NavBar />
       </div>
 
+
       <Switch>
         <ProtectedRoute path="/" exact={true}>
+          
           <Feed />
         </ProtectedRoute>
         <ProtectedRoute path="/profile" exact={true} >
@@ -68,6 +70,8 @@ function App() {
         <ProtectedRoute path='/search'>
           <SearchPage/>
         </ProtectedRoute>
+
+
       </Switch>
     </BrowserRouter>
   );
