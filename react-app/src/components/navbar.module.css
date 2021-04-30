@@ -1,0 +1,71 @@
+@media all and (min-width: 960px) {
+
+
+.nav_div {
+  background-color: #000;
+
+}
+
+
+.nav_div_logoutbutton {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  padding: 10px;
+  list-style: none;
+  color: blue;
+  background-color: white;
+  width: fit-content;
+  left: 70%;
+
+}
+
+
+
+
+.nav_div_createpostbutton {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+  list-style: none;
+  color:blue;
+  position: relative;
+  right: 35%;
+}
+
+
+
+
+
+.nav_div_profile_link {
+  display: flex;
+  justify-content: start;
+  padding: 10px;
+  list-style: none;
+  color:blue;
+  position: relative;
+  left: 25%;
+}
+
+
+.nav_div_home_link {
+  display: flex;
+  justify-content: start;
+  padding: 10px;
+  list-style: none;
+  color:blue;
+  position: relative;
+  left: 25%;
+}
+
+
+.nav_div_search_bar {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  color:blue;
+  position: relative;
+  right: 55%;
+}
+
+}

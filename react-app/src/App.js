@@ -10,7 +10,7 @@ import UserProfile from './components/UserProfile'
 import { authenticate } from "./store/session";
 import SearchPage from "./components/SearchPage";
 
-
+import styles from "./app.module.css"
 
 
 function App() {
@@ -36,7 +36,11 @@ function App() {
 
   return (
     <BrowserRouter>
+      <div className={styles.navbar_wrapper}>
       <NavBar />
+      </div>
+
+
       <Switch>
         <ProtectedRoute path="/" exact={true}>
           <h1>Feed</h1>
