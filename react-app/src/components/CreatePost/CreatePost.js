@@ -11,7 +11,10 @@ const CreatePost = () => {
   const [ errors, setErrors ] = useState([]);
   const history = useHistory();
 
-
+  const onClick = (e) => {
+    // e.preventDefault();
+    history.push('/');
+  }
 
 
   useEffect(() => {
@@ -27,7 +30,7 @@ const CreatePost = () => {
     <>
 
 
-    <form enctype="multipart/form-data" className='' action='/api/posts' method='POST'>
+    <form target='_blank' enctype="multipart/form-data" className='' action='/api/posts' method='POST'>
 
     <label>
     Caption

@@ -131,10 +131,7 @@ def post_put(pid):
     byteString = request.data
     dictString = byteString.decode('UTF-8')
     data = ast.literal_eval(dictString)
-    # print('***************** DATA *************************',data)
-    # print('**************** FORM *********************', dir(request.data))
     post.caption = data['caption']
-    # print(post.to_dict())
     db.session.add(post)
     db.session.commit()
     return post.to_dict()
