@@ -21,13 +21,20 @@
 }
 
 
+
+
 .nav_div_createpostbutton {
   display: flex;
   justify-content: flex-end;
   padding: 5px;
   list-style: none;
   color:blue;
+  position: relative;
+  right: 35%;
 }
+
+
+
 
 
 .nav_div_profile_link {
@@ -36,6 +43,8 @@
   padding: 10px;
   list-style: none;
   color:blue;
+  position: relative;
+  left: 25%;
 }
 
 
@@ -45,6 +54,8 @@
   padding: 10px;
   list-style: none;
   color:blue;
+  position: relative;
+  left: 25%;
 }
 
 
@@ -53,6 +64,8 @@
   justify-content: flex-end;
   list-style: none;
   color:blue;
+  position: relative;
+  right: 55%;
 }
 
 }

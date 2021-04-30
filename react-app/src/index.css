@@ -10,10 +10,25 @@ li {
     list-style: none;
 }
 
+button  {
+    background-color: transparent;
+    padding: 5px;
+    border-color: transparent;
+    color: blue;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+button:hover {
+    color: red;
+    cursor: pointer;
+}
+
+
 
 a {
     text-decoration: none;
     color:blue;
+    font-family: 'JetBrains Mono', monospace;
 }
 
 
