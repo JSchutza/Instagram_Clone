@@ -1,45 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import "./ProfilePage.css";
 import PictureModal from "../PictureModal/Picture";
 import { Modal } from "../../context/Modal";
 import { getUsrPosts } from "../../store/post";
-import { clearPosts } from '../../store/post'
+import { clearPosts } from "../../store/post";
 import { resetUser } from "../../store/session";
 
 function UserProfile() {
   const [showModal, setShowModal] = useState(-1);
   const [_, setLoaded] = useState(false);
-  const [following, setFollowing] = useState('Follow');
-  const dispatch = useDispatch()
-  const {id} = useParams()
-  
-  useEffect(async() => {
-    dispatch(clearPosts())
-    await dispatch(getUsrPosts(id))
+  const [following, setFollowing] = useState("Follow");
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  useEffect(async () => {
+    dispatch(clearPosts());
+    await dispatch(getUsrPosts(id));
     setLoaded(true);
-  },[])
-  
-  
-  const posts = useSelector((store) => store.postReducer)
-  const user = useSelector((store) => store.session.user)
+  }, []);
+
+  const posts = useSelector((store) => store.postReducer);
+  const user = useSelector((store) => store.session.user);
 
   useEffect(() => {
     if (user.followers && user.followers.includes(Number(id))) {
-      setFollowing('Unfollow')
-      console.log('here')
+      setFollowing("Unfollow");
+      console.log("here");
     }
-  },[user])
-
+  }, [user]);
 
   async function followButton() {
-   await fetch(`/api/users/follow?userId2=${id}`)
-   await dispatch(resetUser())
-   following == 'Unfollow' ? setFollowing('Follow') : setFollowing('Unfollow')
+    await fetch(`/api/users/follow?userId2=${id}`);
+    await dispatch(resetUser());
+    following == "Unfollow" ? setFollowing("Follow") : setFollowing("Unfollow");
   }
 
-  const userPosts = Object.values(posts)
+  const userPosts = Object.values(posts);
 
   return (
     <>
@@ -54,8 +52,12 @@ function UserProfile() {
               src={post.url}
             />
             {showModal === post.id && (
-              <Modal  onClose={() => setShowModal(-1)}>
-                <PictureModal setShowModal={setShowModal} post={post} onClose={() => setShowModal(-1)} />
+              <Modal onClose={() => setShowModal(-1)}>
+                <PictureModal
+                  setShowModal={setShowModal}
+                  post={post}
+                  onClose={() => setShowModal(-1)}
+                />
               </Modal>
             )}
           </div>

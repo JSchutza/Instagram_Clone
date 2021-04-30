@@ -1,49 +1,44 @@
-
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&display=swap');
-body{
-    font-family: 'JetBrains Mono', monospace;
-    background-color: rgb(254, 254, 254);
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&display=swap");
+body {
+  font-family: "JetBrains Mono", monospace;
+  background-color: rgb(254, 254, 254);
 }
-
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
-button  {
-    background-color: transparent;
-    padding: 5px;
-    border-color: transparent;
-    color: blue;
-    font-family: 'JetBrains Mono', monospace;
+button {
+  background-color: transparent;
+  padding: 5px;
+  border-color: transparent;
+  color: blue;
+  font-family: "JetBrains Mono", monospace;
 }
 
 button:hover {
-    color: red;
-    cursor: pointer;
+  color: red;
+  cursor: pointer;
 }
-
-
 
 a {
-    text-decoration: none;
-    color:blue;
-    font-family: 'JetBrains Mono', monospace;
+  text-decoration: none;
+  color: blue;
+  font-family: "JetBrains Mono", monospace;
 }
 
-
 a:hover {
-    color: red;
-    cursor: pointer;
+  color: red;
+  cursor: pointer;
 }
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 nav {
-    background: #222;
-    padding: 0 15px;
+  background: #222;
+  padding: 0 15px;
 }

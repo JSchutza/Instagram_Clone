@@ -6,8 +6,6 @@ from faker import Faker
 fake = Faker()
 
 
-
-
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     user_names = [
@@ -213,24 +211,18 @@ def seed_users():
         "everybodydrain"
     ]
 
-
-
-
-
-
     demo = User(username='Demo', email='demo@aa.io', password='password')
     db.session.add(demo)
     db.session.commit()
 
     result = []
     for each in user_names:
-        result.append(User(username=each, email=fake.company_email(), password='password'))
-
+        result.append(
+            User(username=each, email=fake.company_email(), password='password'))
 
     for user in result:
         db.session.add(user)
         db.session.commit()
-
 
 
 # Uses a raw SQL query to TRUNCATE the users table.

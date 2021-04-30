@@ -1,24 +1,19 @@
-
-
-
-.home_wrapper{
-    display: flex;
-    align-items: center;
-    justify-self: center;
-    
+.home_wrapper {
+  display: flex;
+  align-items: center;
+  justify-self: center;
 }
 
-.home_image{
-
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
+.home_image {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
-.inner_wrapper{
-  padding: 20px
+.inner_wrapper {
+  padding: 20px;
 }
 
-.login_text{
-    margin-left: 50px;
+.login_text {
+  margin-left: 50px;
 }

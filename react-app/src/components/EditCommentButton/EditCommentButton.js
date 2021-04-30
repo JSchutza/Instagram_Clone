@@ -1,8 +1,6 @@
-
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { getFlwrPosts, getUsrPosts } from '../../store/post';
-
+import React from "react";
+import { useDispatch } from "react-redux";
+import { getFlwrPosts, getUsrPosts } from "../../store/post";
 
 const EditCommentButton = ({ resetEdit, editVal, commentId, bool }) => {
   const dispatch = useDispatch();
@@ -10,25 +8,24 @@ const EditCommentButton = ({ resetEdit, editVal, commentId, bool }) => {
   const clickHandler = async (event) => {
     event.preventDefault();
     const response = await fetch(`/api/posts/comments/${commentId}`, {
-      method: 'PUT',
-      credentials: 'include',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(editVal)
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(editVal),
     });
-    resetEdit()
+    resetEdit();
     if (!bool) {
-      dispatch(getFlwrPosts())
+      dispatch(getFlwrPosts());
     } else {
-      dispatch(getUsrPosts(bool))
+      dispatch(getUsrPosts(bool));
     }
-  }
+  };
 
   return (
     <>
       <a onClick={(event) => clickHandler(event)}>Save</a>
     </>
-  )
-
-}
+  );
+};
 
 export default EditCommentButton;
