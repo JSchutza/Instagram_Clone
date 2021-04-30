@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { getFlwrPosts } from '../../store/post';
+import { getFlwrPosts, getUsrPosts } from '../../store/post';
 
 
-const EditCommentButton = ({ resetEdit, editVal, commentId }) => {
+const EditCommentButton = ({ resetEdit, editVal, commentId, bool }) => {
   const dispatch = useDispatch();
 
   const clickHandler = async (event) => {
@@ -16,7 +16,11 @@ const EditCommentButton = ({ resetEdit, editVal, commentId }) => {
       body: JSON.stringify(editVal)
     });
     resetEdit()
-    dispatch(getFlwrPosts())
+    if (!bool) {
+      dispatch(getFlwrPosts())
+    } else {
+      dispatch(getUsrPosts(bool))
+    }
   }
 
   return (

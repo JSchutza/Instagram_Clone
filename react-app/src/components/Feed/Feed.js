@@ -57,20 +57,15 @@ const Feed = () => {
                                 { comment.id === editComment &&
                                 <>
                                  <input type="text" value={editVal} onChange={e => setEditVal(e.target.value)}/>
-                                 <EditCommentButton resetEdit={resetEdit} editVal={editVal} commentId={comment.id}/>  
+                                 <EditCommentButton resetEdit={resetEdit} editVal={editVal} commentId={comment.id} bool={false}/>  
                                 </>
                                 }
-
-
-                                )}
                             </ul>
-                        ))}
+                                )
+                        )}
 
                         <CommentForm postId={post.id}/>
                     </div>
-
-
-
                     </div>
                 ))}
              
