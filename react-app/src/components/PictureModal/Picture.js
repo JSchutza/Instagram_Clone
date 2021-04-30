@@ -2,16 +2,8 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect} from "react";
 import "./Picture.css";
 import { deletePost, getUsrPosts } from "../../store/post";
-<<<<<<< HEAD
 import EditCommentButton from '../EditCommentButton';
 import EditFormModal from '../EditModal'
-=======
-
-import EditCommentButton from '../EditCommentButton';
-
-import EditFormModal from '../EditModal'
-
->>>>>>> e82f98b424edd2464a78cf88b52bbce9c35110ec
 
 const Picture = ({ setShowModal, post }) => {
   const [like, setLike] = useState('Like')
