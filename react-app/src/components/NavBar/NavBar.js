@@ -58,6 +58,11 @@ const NavBar = () => {
       </div>
     </div>
 
+        <div className={styles.nav_div_search_bar}>
+          <li>
+            <SearchBar />
+          </li>
+        </div>
 
       </>
     );
@@ -83,12 +88,6 @@ const NavBar = () => {
     <nav>
       <ul>
         {sessionLinks}
-
-        <div className={styles.nav_div_search_bar}>
-          <li>
-            <SearchBar/>
-          </li>
-        </div>
       </ul>
     </nav>
     </div>
