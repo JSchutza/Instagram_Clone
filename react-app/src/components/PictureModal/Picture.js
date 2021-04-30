@@ -4,6 +4,8 @@ import "./Picture.css";
 import { deletePost, getUsrPosts } from "../../store/post";
 import EditCommentButton from "../EditCommentButton";
 import EditFormModal from "../EditModal";
+import CommentForm from '../CommentForm'
+import DeleteCommentButton from '../DeleteCommentButton';
 
 const Picture = ({ setShowModal, post }) => {
   const [like, setLike] = useState("Like");
@@ -50,6 +52,7 @@ const Picture = ({ setShowModal, post }) => {
       <p>{post.likes.length}</p>
       {user.id !== post.userId && <button onClick={likeButton}>{like}</button>}
       <h3>{post.caption}</h3>
+      <CommentForm postId={post.id}/>
       {post.comments.map((comment) => (
         <>
           <p key={comment.id}>{comment.body}</p>
@@ -58,6 +61,10 @@ const Picture = ({ setShowModal, post }) => {
           )}
           {comment.id === editComment && (
             <>
+              <DeleteCommentButton
+                postId={post.id}
+                commentId={comment.id}
+              />
               <input
                 type="text"
                 value={editVal}
@@ -75,7 +82,6 @@ const Picture = ({ setShowModal, post }) => {
       ))}
       {user.id === post.userId && (
         <>
-          <button>Edit</button>
           <EditFormModal post={post} />
           <button onClick={() => del(post)}>Delete</button>
         </>
