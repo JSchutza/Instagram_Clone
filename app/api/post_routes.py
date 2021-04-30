@@ -1,6 +1,7 @@
 import boto3
 import uuid
 import os
+import ast
 from flask import Blueprint, redirect, request
 from app.models import Post, User, db, Comment, Like
 from flask_login import login_required, current_user
@@ -123,10 +124,20 @@ def post_post():
 
 
 
-@post_routes.route("/", methods=["PUT"])
+@post_routes.route("/<int:pid>", methods=["PUT"])
 @login_required
-def post_put():
-    pass
+def post_put(pid):
+    post = Post.query.get(pid)
+    byteString = request.data
+    dictString = byteString.decode('UTF-8')
+    data = ast.literal_eval(dictString)
+    # print('***************** DATA *************************',data)
+    # print('**************** FORM *********************', dir(request.data))
+    post.caption = data['caption']
+    # print(post.to_dict())
+    db.session.add(post)
+    db.session.commit()
+    return post.to_dict()
 
 
 @post_routes.route("/<int:pid>", methods=["DELETE"])
