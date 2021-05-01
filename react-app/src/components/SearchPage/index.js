@@ -14,8 +14,6 @@ function SearchPage() {
   };
 
   const newRes = Object.values(results);
-  // console.log('************ NEW RES ******************', newRes)
-  // console.log('************ results ******************', results)
 
   if (!newRes) {
     return <h1> No Results Found </h1>;
