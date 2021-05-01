@@ -43,9 +43,8 @@ const Feed = () => {
                 key={post.id}
               />
 
-              <LikeButton post={post} user={user} />
-
-              <div>
+              <div className={styles.likes}>
+                <LikeButton post={post} user={user} />
                 {post.likes.length === 1 ? (
                   <p> {post.likes.length} like </p>
                 ) : (
@@ -54,26 +53,26 @@ const Feed = () => {
               </div>
 
               <div>
-                <p className={styles.caption}>
+                <h3 className={styles.caption}>
                   {" "}
-                  <span className={styles.username}>
+                  {/* <span className={styles.username}>
                     {" "}
                     {post.username}{" "}
-                  </span>{" "}
+                  </span>{" "} */}
                   {post.caption}{" "}
-                </p>
+                </h3>
               </div>
 
-              <div>
+              <div className={styles.commentsDiv}>
                 {post.comments.map((comment) => (
                   <ul key={comment.id}>
-                    <p>
+                    <p className={styles.bold}>
                       {" "}
-                      <span className={styles.bold}>
+                      <span >
                         {comment.username}
                       </span>{" "}
-                      {comment.body}
                     </p>
+                    <p className={styles.comments}>-{comment.body}</p>
                     {comment.userId === user.id ? (
                       <DeleteCommentButton
                         bool={true}
@@ -105,7 +104,7 @@ const Feed = () => {
                   </ul>
                 ))}
 
-                <CommentForm postId={post.id} bool={true}/>
+                <CommentForm postId={post.id} bool={true} />
               </div>
             </div>
           ))}

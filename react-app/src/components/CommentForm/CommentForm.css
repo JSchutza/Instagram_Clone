@@ -1,0 +1,24 @@
+.comment-form {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.comment-form-input {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid black;
+    height: 50px;
+    padding: 0 5px;
+    font-family: "JetBrains Mono", monospace;
+}
+
+.comment-form-input:focus {
+    outline: none;
+}
+
+.comment-form-button {
+    position: relative;
+    left: 550px;
+    bottom: -40px
+}
