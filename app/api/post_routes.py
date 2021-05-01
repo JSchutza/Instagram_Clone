@@ -90,10 +90,12 @@ def upload_image():
 
     image = request.files["image"]
     caption = request.form['caption']
+    print('*****************IMAGE************************', image)
+    print('******************CAPTION**********************', request.form['caption'])
 
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400
-
+    
     image.filename = get_unique_filename(image.filename)
 
     upload = upload_file_to_s3(image)
