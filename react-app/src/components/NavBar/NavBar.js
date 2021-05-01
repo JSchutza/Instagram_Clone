@@ -12,6 +12,8 @@ import styles from "./navbar.module.css";
 import profile_icon from "./profile_icon.svg";
 import home_icon from "./home_icon.svg";
 import create_post_icon from "./create_post_icon.svg";
+import photo_gallery from "./photo-gallery.png";
+
 
 const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -25,69 +27,55 @@ const NavBar = () => {
   if (sessionUser) {
     sessionLinks = (
       <>
-        <div className={styles.nav_div_home_link}>
-          <li>
+        <div className={styles.nav_div_search_bar}>
+          <SearchBar />
+        </div>
+        <div className={styles.nav_buttons}>
+          <div className={styles.nav_div_createpostbutton}>
+            <CreatePostModal icon={create_post_icon} />
+          </div>
+          <div className={styles.nav_div_home_link}>
             <NavLink
               to="/"
               exact={true}
               activeClassName="active"
               onClick={() => resetPosts()}
             >
-              <img alt='home-icon' src={home_icon} />
+              <img alt="home-icon" src={home_icon} />
             </NavLink>
-          </li>
+          </div>
 
           <div className={styles.nav_div_profile_link}>
-            <li>
-              <NavLink
-                to="/profile"
-                exact={true}
-                activeClassName="active"
-                onClick={() => resetPosts()}
-              >
-                <img alt='profile-icon' src={profile_icon} />
-              </NavLink>
-            </li>
+            <NavLink
+              to="/profile"
+              exact={true}
+              activeClassName="active"
+              onClick={() => resetPosts()}
+            >
+              <img alt="profile-icon" src={profile_icon} />
+            </NavLink>
           </div>
 
           <div className={styles.nav_div_logoutbutton}>
-            <li>
-              <LogoutButton />
-            </li>
+            <LogoutButton />
           </div>
-
-          <div className={styles.nav_div_createpostbutton}>
-            <li>
-              <CreatePostModal icon={create_post_icon} />
-            </li>
-          </div>
-        </div>
-
-        <div className={styles.nav_div_search_bar}>
-          <li>
-            <SearchBar />
-          </li>
         </div>
       </>
     );
   } else {
     sessionLinks = (
-      <>
-        <li>
-          <LoginFormModal />
-        </li>
-
-        <li>
-          <SignupFormModal />
-        </li>
-      </>
+      <div className={styles.log_sign}>
+        <LoginFormModal />
+        <SignupFormModal />
+      </div>
     );
   }
 
   return (
-    <div className={styles.nav_div}>
-      <nav>
-        <ul>{sessionLinks}</ul>
+    <div>
+      <nav className={styles.nav}>
+        <img alt="icon" src={photo_gallery} />
+        {sessionLinks}
       </nav>
     </div>
   );
