@@ -51,20 +51,24 @@ const Picture = ({ id, setShowModal, post }) => {
     <div className="picture-modal">
       <img alt="post" className="picture-modal-image" src={post.url}></img>
       <div className="picture-modal-like">
-        <p>{post.likes.length}</p>
         {user.id !== post.userId && (
           <button onClick={likeButton}>{like}</button>
         )}
+        {post.likes.length === 1 ? (
+                  <p> {post.likes.length} like </p>
+                ) : (
+                  <p>{post.likes.length} likes </p>
+                )}
       </div>
       <h3 className="picture-modal-caption">{post.caption}</h3>
       {post.comments.map((comment) => (
         <>
           <p key={comment.id} className="picture-modal-comment-body"><p className="picture-modal-comment-username">{comment.username}</p> -{comment.body}</p>
           {comment.id !== editComment && comment.userId === user.id && (
-            <>
-              <a className='picture-modal-edit-comment' onClick={() => setEditComment(comment.id)}>Edit</a>
-              <DeleteCommentButton className='picture-modal-delete-comment' bool={false} id={id} postId={post.id} commentId={comment.id} />
-            </>
+            <div className="picture-modal-edit-delete">
+              <a onClick={() => setEditComment(comment.id)}>Edit</a>
+              <DeleteCommentButton bool={false} id={id} postId={post.id} commentId={comment.id} />
+            </div>
           )}
           {comment.id === editComment && (
             <>

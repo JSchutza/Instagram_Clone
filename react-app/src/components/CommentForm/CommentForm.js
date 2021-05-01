@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { thunk_addComment } from "../../store/comment";
 import { useDispatch } from "react-redux";
 import { getFlwrPosts, getUsrPosts } from "../../store/post";
+import "./CommentForm.css";
+
 
 const CommentForm = ({ postId, bool, id }) => {
   const [bodyText, setBodyText] = useState("");
@@ -21,10 +23,12 @@ const CommentForm = ({ postId, bool, id }) => {
 
   return (
     <>
-      <form className="" onSubmit={submitComment}>
+      <form className="comment-form" onSubmit={submitComment}>
         <label>
-          Comment
+          <button className='comment-form-button' type="submit">Post</button>
           <input
+            className='comment-form-input'
+            placeholder='Add a comment...'
             type="text"
             name="body"
             value={bodyText}
@@ -32,7 +36,6 @@ const CommentForm = ({ postId, bool, id }) => {
           />
         </label>
 
-        <button type="submit"> Create Comment </button>
       </form>
     </>
   );

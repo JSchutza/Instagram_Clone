@@ -31,26 +31,44 @@
 
 .username {
   font-weight: bolder;
+  padding: 0 5px;
 }
 
 .caption {
-  display: flex;
-  justify-content: center;
-  /* margin-left: 37px; */
+  padding: 5px;
+  font-size: 16px;
 }
 
 .bold {
   font-weight: bold;
-  font-style: italic;
+  font-size: 14px;
+  margin-top: 7px;
+}
+.comments {
+  font-size: 12px;
 }
 
 .indContainer {
   border-style: solid;
   border-width: 0.5px;
+  margin-bottom: 20px;
 }
 
 .titleUsername {
   /* margin: 20px; */
   /* margin-left: 10px; */
   font-size: 16px;
+  padding: 2px 5px;
+  font-size: 20px;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 5px;
+}
+
+.commentsDiv {
+  padding: 0 5px;
 }
