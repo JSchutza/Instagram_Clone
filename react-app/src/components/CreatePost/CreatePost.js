@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 const CreatePost = ({ icon }) => {
   const [captionText, setCaptionText] = useState("");
   const [img, setImg] = useState("");
+  const [imageLoading, setImageLoading] = useState(false);
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
@@ -14,13 +15,48 @@ const CreatePost = ({ icon }) => {
     setErrors(errors);
   }, [img]);
 
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    fetch('/api/posts', {
+      method: 'POST',
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", img);
+    formData.append("caption", captionText);
+    
+    setImageLoading(true);
+
+    const res = await fetch('/api/posts', {
+        method: "POST",
+        body: formData,
+    });
+    if (res.ok) {
+      await res.json();
+      setImageLoading(false);
+      // this is where we can flip off the modal
+      history.push("/images");
+    }
+    else {
+      setImageLoading(false);
+      console.log("error");
+    }
+    history.push('/profile')
+  }
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImg(file);
+  }
+
   return (
     <>
       <form
-        enctype="multipart/form-data"
-        className=""
-        action="/api/posts"
-        method="POST"
+        onSubmit={handleSubmit}
       >
         <label>
           Caption
@@ -35,12 +71,10 @@ const CreatePost = ({ icon }) => {
         <label>
           Image
           <input
-            type="file"
-            name="image"
-            accept="image/png, image/jpg"
-            value={img}
-            onChange={(e) => setImg(e.target.value)}
-          />
+              type="file"
+              accept="image/*"
+              onChange={updateImage}
+            />
         </label>
 
         <button
@@ -51,6 +85,7 @@ const CreatePost = ({ icon }) => {
           {" "}
           Create Post{" "}
         </button>
+        {(imageLoading)&& <p>Loading...</p>}
       </form>
     </>
   );

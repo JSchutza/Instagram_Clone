@@ -84,40 +84,71 @@ def post(id):
 
 @post_routes.route("", methods=["POST"])
 @login_required
-def post_post():
+def upload_image():
+    if "image" not in request.files:
+        return {"errors": "image required"}, 400
 
-    form = CreatePostForm(CombinedMultiDict((request.files, request.form)))
-    form["csrf_token"].data = request.cookies["csrf_token"]
+    image = request.files["image"]
+    caption = request.form['caption']
+    print('*****************IMAGE************************', image)
+    print('******************CAPTION**********************', request.form['caption'])
 
-    if form.validate_on_submit():
-        # print(form.data, "------------------------------------------ \n")
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+    
+    image.filename = get_unique_filename(image.filename)
 
-        image = form.data["image"]
-        # print(dir(image), "------------------------------------------ \n")
+    upload = upload_file_to_s3(image)
 
-        if not allowed_file(image.filename):
-            return {"errors": "file type not permitted"}, 400
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
 
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
+    url = upload["url"]
+    # flask_login allows us to get the current user from the request
+    new_image = Post(
+        userId=current_user.get_id(), url=url, caption=caption
+    )
+    db.session.add(new_image)
+    db.session.commit()
+    return {"url": url}
 
-        if "url" not in upload:
-            # if the dictionary doesn't have a url key
-            # it means that there was an error when we tried to upload
-            # so we send back that error message
-            return upload, 400
+# def post_post():
 
-        url = upload["url"]
-        # flask_login allows us to get the current user from the request
+    # form = CreatePostForm(CombinedMultiDict((request.files, request.form)))
+    # form["csrf_token"].data = request.cookies["csrf_token"]
 
-        new_image = Post(
-            userId=current_user.get_id(), url=url, caption=form.data["caption"]
-        )
+    # if form.validate_on_submit():
+    #     # print(form.data, "------------------------------------------ \n")
 
-        db.session.add(new_image)
-        db.session.commit()
-        return {"url": url}
-    return {"message": "error creating a post. "}
+    #     image = form.data["image"]
+    #     # print(dir(image), "------------------------------------------ \n")
+
+    #     if not allowed_file(image.filename):
+    #         return {"errors": "file type not permitted"}, 400
+
+    #     image.filename = get_unique_filename(image.filename)
+    #     upload = upload_file_to_s3(image)
+
+    #     if "url" not in upload:
+    #         # if the dictionary doesn't have a url key
+    #         # it means that there was an error when we tried to upload
+    #         # so we send back that error message
+    #         return upload, 400
+
+    #     url = upload["url"]
+    #     # flask_login allows us to get the current user from the request
+
+    #     new_image = Post(
+    #         userId=current_user.get_id(), url=url, caption=form.data["caption"]
+    #     )
+
+    #     db.session.add(new_image)
+    #     db.session.commit()
+    #     return {"url": url}
+    # return {"message": "error creating a post. "}
 
 
 @post_routes.route("/<int:pid>", methods=["PUT"])
