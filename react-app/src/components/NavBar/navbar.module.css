@@ -23,7 +23,7 @@
 
   .nav_div_profile_link {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     list-style: none;
     color: blue;
     position: relative;
@@ -33,7 +33,7 @@
 
   .nav_div_home_link {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     padding: 10px;
     list-style: none;
     color: blue;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import User from "./components/User/User";
@@ -40,6 +40,7 @@ function App() {
               Please login or sign-up to get started
             </p>
             <img
+              alt='home-img'
               className={styles.home_image}
               src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flooxcie.com%2Fwp-content%2Fuploads%2F2019%2F02%2Fbest-camera-for-instagram-guide.jpg&f=1&nofb=1"
             ></img>

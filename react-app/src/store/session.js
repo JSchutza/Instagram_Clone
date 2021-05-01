@@ -52,12 +52,11 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  const response = await fetch("/api/auth/logout", {
+  await fetch("/api/auth/logout", {
     headers: {
       "Content-Type": "application/json",
     },
   });
-  const data = await response.json();
   dispatch(removeUser());
 };
 

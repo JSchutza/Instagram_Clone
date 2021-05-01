@@ -7,7 +7,7 @@ const EditCommentButton = ({ resetEdit, editVal, commentId, bool }) => {
 
   const clickHandler = async (event) => {
     event.preventDefault();
-    const response = await fetch(`/api/posts/comments/${commentId}`, {
+    await fetch(`/api/posts/comments/${commentId}`, {
       method: "PUT",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 
 const CreatePost = ({ icon }) => {
   const [captionText, setCaptionText] = useState("");
   const [img, setImg] = useState("");
   const [errors, setErrors] = useState([]);
-  const history = useHistory();
 
   useEffect(() => {
     const errors = [];

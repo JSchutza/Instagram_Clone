@@ -1,10 +1,9 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { editPost } from "../../store/post";
 import { useHistory } from "react-router-dom";
 
 const EditForm = ({ post }) => {
-  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
   const [caption, setCaption] = useState(`${post.caption}`);
@@ -18,7 +17,7 @@ const EditForm = ({ post }) => {
 
   return (
     <div>
-      <img className="picture-modal" src={post.url}></img>
+      <img alt='post' className="picture-modal" src={post.url}></img>
       <form className="edit-form" onSubmit={onSubmit}>
         <input value={caption} onChange={(e) => setCaption(e.target.value)} />
         <button>Update</button>
