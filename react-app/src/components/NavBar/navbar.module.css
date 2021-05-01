@@ -1,54 +1,61 @@
 @media all and (min-width: 960px) {
-  .nav_div {
-    background-color: #000;
+  .nav {
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    margin: 0 5px;
   }
 
   .nav_div_logoutbutton {
     display: flex;
     justify-content: flex-end;
-    position: relative;
     padding: 10px;
     list-style: none;
     color: blue;
     background-color: white;
     width: fit-content;
-    left: 90%;
   }
 
   .nav_div_createpostbutton {
     display: flex;
     list-style: none;
-    position: relative;
   }
 
   .nav_div_profile_link {
-    display: flex;
     justify-content: flex-start;
     list-style: none;
     color: blue;
-    position: relative;
-    left: 12%;
     width: fit-content;
   }
 
   .nav_div_home_link {
-    display: flex;
-    justify-content: flex-start;
-    padding: 10px;
+    padding-right: 10px;
     list-style: none;
     color: blue;
-    position: relative;
-    left: 70%;
-    background-color: #fff;
     width: fit-content;
   }
 
   .nav_div_search_bar {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     list-style: none;
     color: blue;
+    height: 20px;
+  }
+
+  .nav_buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+  .log_sign {
     position: relative;
-    right: 55%;
+    right: 20px;
   }
 }

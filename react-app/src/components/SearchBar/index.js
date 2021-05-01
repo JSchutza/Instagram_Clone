@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { searchPop } from "../../store/search";
+import {BsSearch} from 'react-icons/bs'
 
 function SearchBar() {
   const [query, setQuery] = useState("");
@@ -20,7 +21,7 @@ function SearchBar() {
         value={query}
         placeholder="Search for users"
       ></input>
-      <button onClick={search}>search</button>
+      <button onClick={search}><BsSearch className='import-id'/></button>
     </>
   );
 }

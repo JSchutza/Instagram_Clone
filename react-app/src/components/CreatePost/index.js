@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import CreatePost from "./CreatePost.js";
+import {IoAdd} from "react-icons/io5"
+
 
 function CreatePostModal({ icon }) {
   const [showModal, setShowModal] = useState(false);
@@ -8,7 +10,7 @@ function CreatePostModal({ icon }) {
   return (
     <>
       <button className="create-post-btn" onClick={() => setShowModal(true)}>
-        Create Post
+        <IoAdd className='import-id'/>
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
