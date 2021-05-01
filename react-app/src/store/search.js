@@ -23,13 +23,8 @@ export const searchPop = (query) => async (dispatch) => {
 export default function searchReducer(state = {}, action) {
   switch (action.type) {
     case POPULATE_SEARCH:
-      const searchRes = {};
       if (!action.payload.results) return state;
-      action.payload.results.forEach((result) => {
-        searchRes[result.id] = result;
-      });
-
-      return { ...state, ...searchRes };
+      return { ...state, ...action.payload.results };
 
     default:
       return state;
