@@ -24,7 +24,7 @@ export default function searchReducer(state = {}, action) {
   switch (action.type) {
     case POPULATE_SEARCH:
       if (!action.payload.results) return state;
-      return { ...state, ...action.payload.results};
+      return { ...state, ...action.payload.results };
 
     default:
       return state;
