@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { thunk_addComment } from "../../store/comment";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getFlwrPosts } from "../../store/post";
 
 const CommentForm = ({ postId }) => {

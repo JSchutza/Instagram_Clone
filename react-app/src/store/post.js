@@ -32,7 +32,7 @@ const editPosts = (post) => ({
 });
 
 export const deletePost = (post) => async (dispatch) => {
-  const response = await fetch(`/api/posts/${post.id}`, {
+  await fetch(`/api/posts/${post.id}`, {
     method: "DELETE",
     credentials: "include",
   });

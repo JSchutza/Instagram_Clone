@@ -13,7 +13,7 @@ const popSearch = (results) => ({
 
 export const searchPop = (query) => async (dispatch) => {
   const response = await fetch(`/api/search?q=${query}`);
-  const result = await response.json();
+  let result = await response.json();
   if (!result) result = { results: [] };
   dispatch(popSearch(result));
   return result;

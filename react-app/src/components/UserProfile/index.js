@@ -10,16 +10,16 @@ import { resetUser } from "../../store/session";
 
 function UserProfile() {
   const [showModal, setShowModal] = useState(-1);
-  const [_, setLoaded] = useState(false);
+  const [, setLoaded] = useState(false);
   const [following, setFollowing] = useState("Follow");
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(clearPosts());
-    await dispatch(getUsrPosts(id));
+    dispatch(getUsrPosts(id));
     setLoaded(true);
-  }, []);
+  }, [dispatch, id]);
 
   const posts = useSelector((store) => store.postReducer);
   const user = useSelector((store) => store.session.user);
@@ -29,12 +29,12 @@ function UserProfile() {
       setFollowing("Unfollow");
       console.log("here");
     }
-  }, [user]);
+  }, [user, id]);
 
   async function followButton() {
     await fetch(`/api/users/follow?userId2=${id}`);
     await dispatch(resetUser());
-    following == "Unfollow" ? setFollowing("Follow") : setFollowing("Unfollow");
+    following === "Unfollow" ? setFollowing("Follow") : setFollowing("Unfollow");
   }
 
   const userPosts = Object.values(posts);
@@ -47,6 +47,7 @@ function UserProfile() {
         {userPosts.map((post) => (
           <div className="inner-image-container" key={post.id}>
             <img
+              alt='post'
               onClick={() => setShowModal(post.id)}
               className="images"
               src={post.url}

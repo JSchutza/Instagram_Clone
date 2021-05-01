@@ -7,7 +7,7 @@ const DeleteCommentButton = ({ postId, commentId }) => {
 
   const clickHandler = async (event) => {
     event.preventDefault();
-    const response = await fetch(`api/posts/${postId}/comments/${commentId}`, {
+    await fetch(`api/posts/${postId}/comments/${commentId}`, {
       method: "DELETE",
       credentials: "include",
     });
