@@ -5,6 +5,7 @@ import CommentForm from "../CommentForm";
 import DeleteCommentButton from "../DeleteCommentButton";
 import styles from "./Feed.module.css";
 import EditCommentButton from "../EditCommentButton";
+import LikeButton from "../LikeButton";
 
 const Feed = () => {
   const [loaded, setLoaded] = useState(false);
@@ -23,16 +24,16 @@ const Feed = () => {
 
   if (!loaded || posts === null) {
     return (
-      <h1>
+      <div>
         <h1>Loading...</h1>
-      </h1>
+      </div>
     );
   } else {
     return (
       <div className={styles.outerContainer}>
         <div className={styles.imageContainer}>
           {Object.values(posts).map((post) => (
-            <div className={styles.indContainer}>
+            <div key={post.id} className={styles.indContainer}>
               <span className={styles.titleUsername}>{post.username}</span>
 
               <img
@@ -41,6 +42,8 @@ const Feed = () => {
                 src={post.url}
                 key={post.id}
               />
+
+              <LikeButton post={post} user={user} />
 
               <div>
                 {post.likes.length === 1 ? (
@@ -63,8 +66,8 @@ const Feed = () => {
 
               <div>
                 {post.comments.map((comment) => (
-                  <ul>
-                    <p key={comment.id}>
+                  <ul key={comment.id}>
+                    <p>
                       {" "}
                       <span className={styles.bold}>
                         {comment.username}

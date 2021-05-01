@@ -8,20 +8,19 @@ import { getUsrPosts } from "../../store/post";
 function Profile() {
   const [showModal, setShowModal] = useState(-1);
 
-  const [loaded, setLoaded] = useState(false);
+  const [, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((store) => store.session.user);
 
   useEffect(() => {
     dispatch(getUsrPosts(user.id));
     setLoaded(true);
-  }, []);
+  }, [dispatch, user.id]);
 
   const posts = useSelector((store) => store.postReducer);
 
   const userPosts = Object.values(posts);
   Object.values(posts).forEach((post) => console.log(post.userId));
-  console.log(userPosts);
   return (
     <>
       <div className="image-container">
@@ -29,6 +28,7 @@ function Profile() {
         {userPosts.map((post) => (
           <div className="inner-image-container" key={post.id}>
             <img
+              alt='post'
               onClick={() => setShowModal(post.id)}
               className="images"
               src={post.url}

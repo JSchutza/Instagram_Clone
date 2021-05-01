@@ -33,7 +33,7 @@ const NavBar = () => {
               activeClassName="active"
               onClick={() => resetPosts()}
             >
-              <img src={home_icon} />
+              <img alt='home-icon' src={home_icon} />
             </NavLink>
           </li>
 
@@ -45,7 +45,7 @@ const NavBar = () => {
                 activeClassName="active"
                 onClick={() => resetPosts()}
               >
-                <img src={profile_icon} />
+                <img alt='profile-icon' src={profile_icon} />
               </NavLink>
             </li>
           </div>

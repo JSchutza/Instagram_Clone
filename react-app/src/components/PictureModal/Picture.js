@@ -14,6 +14,7 @@ const Picture = ({ setShowModal, post }) => {
   const [editVal, setEditVal] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const userId = user.id;
 
   const resetEdit = () => setEditComment(-1);
 
@@ -23,13 +24,13 @@ const Picture = ({ setShowModal, post }) => {
   };
 
   useEffect(() => {
-    for (like in post.like) {
-      if (like.userId === user.Id) {
+    post.likes.forEach((like) => {
+      if (like.userId === userId) {
         setLike("Unlike");
         setLid(like.id);
       }
-    }
-  }, [post]);
+    });
+  }, [post, userId]);
 
   async function likeButton() {
     if (like === "Unlike") {
@@ -48,7 +49,7 @@ const Picture = ({ setShowModal, post }) => {
 
   return (
     <div>
-      <img className="picture-modal" src={post.url}></img>
+      <img alt="post" className="picture-modal" src={post.url}></img>
       <p>{post.likes.length}</p>
       {user.id !== post.userId && <button onClick={likeButton}>{like}</button>}
       <h3>{post.caption}</h3>
