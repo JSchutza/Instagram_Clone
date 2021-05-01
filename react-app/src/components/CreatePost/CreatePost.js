@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-const CreatePost = ({ icon }) => {
+const CreatePost = ({ setShowModal, icon }) => {
   const [captionText, setCaptionText] = useState("");
   const [img, setImg] = useState("");
   const [imageLoading, setImageLoading] = useState(false);
@@ -18,19 +18,15 @@ const CreatePost = ({ icon }) => {
   }, [img]);
 
 
-  const onSubmit = async (e) => {
-    e.preventDefault()
-    fetch('/api/posts', {
-      method: 'POST',
-    })
-  }
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image", img);
     formData.append("caption", captionText);
-    
+
     setImageLoading(true);
 
     const res = await fetch('/api/posts', {
@@ -40,7 +36,7 @@ const CreatePost = ({ icon }) => {
     if (res.ok) {
       await res.json();
       setImageLoading(false);
-      // this is where we can flip off the modal
+      setShowModal(false)
       history.push("/images");
     }
     else {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import CreatePost from "./CreatePost.js";
 
-function CreatePostModal() {
+function CreatePostModal({ icon }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ function CreatePostModal() {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CreatePost />
+          <CreatePost icon={icon} setShowModal={setShowModal} />
         </Modal>
       )}
     </>
