@@ -4,7 +4,7 @@ import Picture from "./Picture.js";
 function PictureModal({ setShowModal, post }) {
   return (
     <>
-      <Picture setShowModal={setShowModal} post={post} />
+      <Picture id={id} setShowModal={setShowModal} post={post} />
     </>
   );
 }

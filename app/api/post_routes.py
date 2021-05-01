@@ -219,6 +219,7 @@ def comment_delete(id, cid):
     old_comment = Comment.query.get(cid)
     user_id = int(current_user.get_id())
     comment_user = Comment.query.get(cid).userId
+    
     if user_id == comment_user:
         db.session.delete(old_comment)
         db.session.commit()

@@ -4,10 +4,10 @@ import "./Picture.css";
 import { deletePost, getUsrPosts } from "../../store/post";
 import EditCommentButton from "../EditCommentButton";
 import EditFormModal from "../EditModal";
-import CommentForm from '../CommentForm'
-import DeleteCommentButton from '../DeleteCommentButton';
+import CommentForm from "../CommentForm";
+import DeleteCommentButton from "../DeleteCommentButton";
 
-const Picture = ({ setShowModal, post }) => {
+const Picture = ({ id, setShowModal, post }) => {
   const [like, setLike] = useState("Like");
   const [lid, setLid] = useState("");
   const [editComment, setEditComment] = useState(-1);
@@ -48,24 +48,26 @@ const Picture = ({ setShowModal, post }) => {
   }
 
   return (
-    <div>
-      <img alt="post" className="picture-modal" src={post.url}></img>
-      <p>{post.likes.length}</p>
-      {user.id !== post.userId && <button onClick={likeButton}>{like}</button>}
-      <h3>{post.caption}</h3>
-      <CommentForm postId={post.id}/>
+    <div className="picture-modal">
+      <img alt="post" className="picture-modal-image" src={post.url}></img>
+      <div className="picture-modal-like">
+        <p>{post.likes.length}</p>
+        {user.id !== post.userId && (
+          <button onClick={likeButton}>{like}</button>
+        )}
+      </div>
+      <h3 className="picture-modal-caption">{post.caption}</h3>
       {post.comments.map((comment) => (
         <>
-          <p key={comment.id}>{comment.body}</p>
+          <p key={comment.id} className="picture-modal-comment-body"><p className="picture-modal-comment-username">{comment.username}</p> -{comment.body}</p>
           {comment.id !== editComment && comment.userId === user.id && (
-            <a onClick={() => setEditComment(comment.id)}>Edit</a>
+            <>
+              <a className='picture-modal-edit-comment' onClick={() => setEditComment(comment.id)}>Edit</a>
+              <DeleteCommentButton className='picture-modal-delete-comment' bool={false} id={id} postId={post.id} commentId={comment.id} />
+            </>
           )}
           {comment.id === editComment && (
             <>
-              <DeleteCommentButton
-                postId={post.id}
-                commentId={comment.id}
-              />
               <input
                 type="text"
                 value={editVal}
@@ -81,6 +83,7 @@ const Picture = ({ setShowModal, post }) => {
           )}
         </>
       ))}
+      <CommentForm postId={post.id} bool={false} id={id}/>
       {user.id === post.userId && (
         <>
           <EditFormModal post={post} />
