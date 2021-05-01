@@ -6,7 +6,7 @@ const addComment = (comment) => ({
 });
 
 export const thunk_addComment = ({ postId, bodyText }) => async (dispatch) => {
-  const response = await fetch(`api/posts/${postId}/comments`, {
+  const response = await fetch(`/api/posts/${postId}/comments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

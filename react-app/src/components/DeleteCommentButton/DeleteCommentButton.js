@@ -1,17 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getFlwrPosts } from "../../store/post";
+import { getFlwrPosts, getUsrPosts } from "../../store/post";
 
-const DeleteCommentButton = ({ postId, commentId }) => {
+const DeleteCommentButton = ({ bool, id, postId, commentId }) => {
   const dispatch = useDispatch();
 
   const clickHandler = async (event) => {
     event.preventDefault();
-    await fetch(`api/posts/${postId}/comments/${commentId}`, {
+    await fetch(`/api/posts/${postId}/comments/${commentId}`, {
       method: "DELETE",
       credentials: "include",
     });
-    dispatch(getFlwrPosts());
+    bool ? dispatch(getFlwrPosts()) : dispatch(getUsrPosts(id))
   };
 
   return (

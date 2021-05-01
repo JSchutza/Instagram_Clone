@@ -55,6 +55,7 @@ function UserProfile() {
             {showModal === post.id && (
               <Modal onClose={() => setShowModal(-1)}>
                 <PictureModal
+                  id={id}
                   setShowModal={setShowModal}
                   post={post}
                   onClose={() => setShowModal(-1)}

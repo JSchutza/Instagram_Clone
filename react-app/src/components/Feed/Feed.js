@@ -76,6 +76,7 @@ const Feed = () => {
                     </p>
                     {comment.userId === user.id ? (
                       <DeleteCommentButton
+                        bool={true}
                         postId={post.id}
                         commentId={comment.id}
                       />
@@ -104,7 +105,7 @@ const Feed = () => {
                   </ul>
                 ))}
 
-                <CommentForm postId={post.id} />
+                <CommentForm postId={post.id} bool={true}/>
               </div>
             </div>
           ))}

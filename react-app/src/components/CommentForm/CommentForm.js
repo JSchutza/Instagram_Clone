@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { thunk_addComment } from "../../store/comment";
 import { useDispatch } from "react-redux";
-import { getFlwrPosts } from "../../store/post";
+import { getFlwrPosts, getUsrPosts } from "../../store/post";
 
-const CommentForm = ({ postId }) => {
+const CommentForm = ({ postId, bool, id }) => {
   const [bodyText, setBodyText] = useState("");
   const dispatch = useDispatch();
 
@@ -14,8 +14,10 @@ const CommentForm = ({ postId }) => {
       postId,
     };
     dispatch(thunk_addComment(payload));
-    dispatch(getFlwrPosts());
-  };
+    console.log(bool)
+    bool ? dispatch(getFlwrPosts()) : dispatch(getUsrPosts(id))
+    setBodyText('')
+    };
 
   return (
     <>
