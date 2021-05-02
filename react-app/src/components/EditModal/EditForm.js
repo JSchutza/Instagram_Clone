@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { editPost } from "../../store/post";
 import { useHistory } from "react-router-dom";
 
-const EditForm = ({ post }) => {
+const EditForm = ({ post, setShowModal }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [caption, setCaption] = useState(`${post.caption}`);
@@ -12,7 +12,8 @@ const EditForm = ({ post }) => {
     e.preventDefault();
     const form = { id: post.id, caption: caption };
     dispatch(editPost(form));
-    history.push("/");
+    setShowModal(false);
+    history.push("/profile");
   };
 
   return (

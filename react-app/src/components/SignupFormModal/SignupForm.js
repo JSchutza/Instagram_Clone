@@ -50,6 +50,7 @@ const SignUpForm = () => {
         <label>User Name</label>
           <br />
         <input
+          className={styles.signup_input}
           type="text"
           name="username"
           onChange={updateUsername}
@@ -60,6 +61,7 @@ const SignUpForm = () => {
         <label>Email</label>
           <br />
         <input
+          className={styles.signup_input}
           type="text"
           name="email"
           onChange={updateEmail}
@@ -70,6 +72,7 @@ const SignUpForm = () => {
         <label>Password</label>
           <br />
         <input
+          className={styles.signup_input}
           type="password"
           name="password"
           onChange={updatePassword}
@@ -80,6 +83,7 @@ const SignUpForm = () => {
         <label>Repeat Password</label>
           <br />
         <input
+          className={styles.signup_input}
           type="password"
           name="repeat_password"
           onChange={updateRepeatPassword}
@@ -87,7 +91,7 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type="submit">Sign Up</button>
+      <button className={styles.signup} type="submit">Sign Up</button>
     </form>
     </div>
   );
