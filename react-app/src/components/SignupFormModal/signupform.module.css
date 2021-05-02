@@ -1,23 +1,35 @@
 .signup_btn {
-  position: relative;
-  left: 20%;
+  border: 1px solid black;
+  color: black;
+  margin-left: 10px;
 }
 
-
-
+.signup {
+  border: 1px solid black;
+  color: black;
+  margin-top: 15px;
+}
 
 .signup_wrapper {
   display: flex;
   position: relative;
-  width: auto;
-  padding: 5%;
+  width: 400px;
+  padding: 20px 20px 20px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-
-
 .signup_input_div {
-  position: relative;
-  width: auto;
+  width: 400px;
   display: flex;
-  padding: 3%;
+  flex-direction: column;
+}
+
+.signup_input {
+  width: 90%;
+  border-radius: 0;
+  border: 1px solid black;
+  height: 40px;
+  padding: 0 5px;
+  font-family: "JetBrains Mono", monospace;
 }

@@ -39,11 +39,12 @@ const LoginForm = () => {
           <div>{error}</div>
         ))}
       </div>
-      <form onSubmit={onLogin}>
+      <form className={styles.login_form} onSubmit={onLogin}>
         <div>
           <label htmlFor="email">Email</label>
           <br />
           <input
+            className={styles.input}
             name="email"
             type="text"
             placeholder="Email"
@@ -56,6 +57,7 @@ const LoginForm = () => {
           <label htmlFor="password">Password</label>
           <br />
           <input
+            className={styles.input}
             name="password"
             type="password"
             placeholder="Password"
@@ -63,7 +65,7 @@ const LoginForm = () => {
             onChange={updatePassword}
           />
 
-          <button type="submit">Login</button>
+          <button className={styles.login} type="submit">Login</button>
         </div>
         <br />
       </form>
