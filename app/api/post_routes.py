@@ -59,6 +59,8 @@ def posts():
         for post in Post.query.filter(Post.userId == follower.id):
             result.append(post)
     result.sort(key=lambda post: post.createdAt)
+    if len(result) > 50:
+        result = result[0:50]
 
     if result is None:
         return "no posts found"

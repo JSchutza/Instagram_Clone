@@ -6,7 +6,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import CreatePostModal from "../CreatePost";
 import SearchBar from "../SearchBar";
-import { clearPosts } from "../../store/post";
+import { clearPosts, getUsrPosts, getFlwrPosts } from "../../store/post";
 import styles from "./navbar.module.css";
 
 import profile_icon from "./profile_icon.svg";
@@ -19,8 +19,13 @@ const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
-  const resetPosts = () => {
+  const resetPosts = (bool) => {
     dispatch(clearPosts());
+    if (bool) {
+      dispatch(getFlwrPosts())
+    } else {
+      dispatch(getUsrPosts(sessionUser.id))
+    }
   };
 
   let sessionLinks;
@@ -39,7 +44,7 @@ const NavBar = () => {
               to="/"
               exact={true}
               activeClassName="active"
-              onClick={() => resetPosts()}
+              onClick={() => resetPosts(true)}
             >
               <img alt="home-icon" src={home_icon} />
             </NavLink>
@@ -50,7 +55,7 @@ const NavBar = () => {
               to="/profile"
               exact={true}
               activeClassName="active"
-              onClick={() => resetPosts()}
+              onClick={() => resetPosts(false)}
             >
               <img alt="profile-icon" src={profile_icon} />
             </NavLink>
