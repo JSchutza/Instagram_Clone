@@ -6,7 +6,7 @@ from random import randint
 
 def seed_follows():
 
-    count = 4000
+    count = 1000
     result = []
     tracker = set()
     while count > 0:
