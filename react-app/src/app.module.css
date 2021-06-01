@@ -1,19 +1,20 @@
 .home_wrapper {
-  display: flex;
-  align-items: center;
-  justify-self: center;
+
 }
 
 .home_image {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   object-fit: cover;
 }
 
 .inner_wrapper {
-  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .login_text {
-  margin-left: 50px;
+  font-size: 20px;
+
 }

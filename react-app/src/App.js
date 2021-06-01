@@ -32,7 +32,7 @@ function App() {
   if (user == null) {
     return (
       <BrowserRouter>
-        <div className={styles.home_wrappper}>
+        <div className={styles.home_wrapper}>
           <div className={styles.navbar_wrapper}>
             <NavBar />
           </div>
@@ -45,9 +45,9 @@ function App() {
               className={styles.home_image}
               src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flooxcie.com%2Fwp-content%2Fuploads%2F2019%2F02%2Fbest-camera-for-instagram-guide.jpg&f=1&nofb=1"
             ></img>
+         <Footer />
           </div>
         </div>
-        <Footer />
       </BrowserRouter>
     );
   }
