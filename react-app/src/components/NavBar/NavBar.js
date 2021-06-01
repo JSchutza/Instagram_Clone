@@ -8,6 +8,7 @@ import CreatePostModal from "../CreatePost";
 import SearchBar from "../SearchBar";
 import { clearPosts, getUsrPosts, getFlwrPosts } from "../../store/post";
 import styles from "./navbar.module.css";
+import { demoLogin } from '../../store/session';
 
 import profile_icon from "./profile_icon.svg";
 import home_icon from "./home_icon.svg";
@@ -18,6 +19,10 @@ import photo_gallery from "./photo-gallery.png";
 const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+
+  const demo = async () => {
+   await dispatch(demoLogin());
+  };
 
   const resetPosts = (bool) => {
     dispatch(clearPosts());
@@ -72,6 +77,7 @@ const NavBar = () => {
       <div className={styles.log_sign}>
         <LoginFormModal />
         <SignupFormModal />
+        <button className={styles.demoButton} onClick={() => demo()}>Demo-Login</button>
       </div>
     );
   }
