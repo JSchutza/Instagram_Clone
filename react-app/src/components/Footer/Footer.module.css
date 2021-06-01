@@ -1,0 +1,30 @@
+.mainContainer{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+
+.adamContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px 0 100px;
+}
+
+.linkedin{
+    padding: 2px 0px 0px 12px
+}
+
+.github{
+    padding: 0px 0px 0px 16px
+}
+
+.linkedin:hover{
+       transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.github:hover{
+       transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
