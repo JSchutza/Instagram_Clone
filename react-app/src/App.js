@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import User from "./components/User/User";
 import Feed from "./components/Feed";
 import UserProfile from "./components/UserProfile";
+import Footer from './components/Footer';
 
 import { authenticate } from "./store/session";
 import SearchPage from "./components/SearchPage";
@@ -46,6 +47,7 @@ function App() {
             ></img>
           </div>
         </div>
+        <Footer />
       </BrowserRouter>
     );
   }
