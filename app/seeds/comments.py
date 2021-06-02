@@ -8,11 +8,11 @@ fake = Faker()
 
 
 def seed_comments():
-    count = 1000
+    count = 500
     result = []
     while count > 0:
         result.append(Comment(userId=randint(1, 200), postId=randint(
-            1, 1000), body=fake.text(max_nb_chars=100)))
+            1, 500), body=fake.text(max_nb_chars=100)))
         count -= 1
 
     for comment in result:

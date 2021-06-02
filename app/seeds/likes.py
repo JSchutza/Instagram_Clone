@@ -4,12 +4,12 @@ from random import randint
 
 
 def seed_likes():
-    count = 1000
+    count = 500
     result = []
     tracker = set()
     while count > 0:
         userId = randint(1, 200)
-        postId = randint(1, 1000)
+        postId = randint(1, 500)
         tup = (userId, postId)
 
         if tup in tracker:

@@ -22,7 +22,7 @@ def get_random_img():
 
 def seed_posts():
     url_list = get_random_img()
-    count = 1000
+    count = 500
     result = []
     while count > 0:
         result.append(Post(caption=fake.text(max_nb_chars=100),
