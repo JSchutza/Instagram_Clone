@@ -59,3 +59,9 @@
     right: 20px;
   }
 }
+
+.demoButton{
+  border: 1px solid black;
+  color: black;
+  margin-left: 15px;
+}
