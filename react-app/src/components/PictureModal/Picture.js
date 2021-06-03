@@ -15,6 +15,7 @@ const Picture = ({ id, setShowModal, post }) => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const userId = user.id;
+  const [comment, setComment] = useState(false);
 
   const resetEdit = () => setEditComment(-1);
 
@@ -46,6 +47,10 @@ const Picture = ({ id, setShowModal, post }) => {
     }
     dispatch(getUsrPosts(post.userId));
   }
+  useEffect(() => {
+      dispatch(getUsrPosts(post.userId));
+      setComment(false)
+  }, [comment, dispatch, post.userId])
 
   return (
     <div className="picture-modal">
@@ -67,7 +72,7 @@ const Picture = ({ id, setShowModal, post }) => {
           {comment.id !== editComment && comment.userId === user.id && (
             <div className="picture-modal-edit-delete">
               <a onClick={() => setEditComment(comment.id)}>Edit</a>
-              <DeleteCommentButton bool={false} id={id} postId={post.id} commentId={comment.id} />
+              <DeleteCommentButton setComment={setComment} bool={false} id={id} postId={post.id} commentId={comment.id} />
             </div>
           )}
           {comment.id === editComment && (
@@ -87,7 +92,7 @@ const Picture = ({ id, setShowModal, post }) => {
           )}
         </>
       ))}
-      <CommentForm postId={post.id} bool={false} id={id}/>
+      <CommentForm setComment={setComment} postId={post.id} bool={false} id={id}/>
       {user.id === post.userId && (
         <>
           <EditFormModal post={post} />

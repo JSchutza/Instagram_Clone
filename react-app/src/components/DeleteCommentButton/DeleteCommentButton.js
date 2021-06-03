@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { getFlwrPosts, getUsrPosts } from "../../store/post";
 
-const DeleteCommentButton = ({ bool, id, postId, commentId }) => {
+const DeleteCommentButton = ({ setComment, bool, id, postId, commentId }) => {
   const dispatch = useDispatch();
 
   const clickHandler = async (event) => {
@@ -12,6 +12,7 @@ const DeleteCommentButton = ({ bool, id, postId, commentId }) => {
       credentials: "include",
     });
     bool ? dispatch(getFlwrPosts()) : dispatch(getUsrPosts(id))
+    setComment(true)
   };
 
   return (
