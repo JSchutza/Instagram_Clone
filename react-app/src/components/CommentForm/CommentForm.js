@@ -18,7 +18,7 @@ const CommentForm = ({ setComment, postId, bool, id }) => {
     dispatch(thunk_addComment(payload));
     bool ? dispatch(getFlwrPosts()) : dispatch(getUsrPosts(id))
     setBodyText('')
-    setComment(true)
+    if (setComment) {setComment(true)}
     };
 
   return (

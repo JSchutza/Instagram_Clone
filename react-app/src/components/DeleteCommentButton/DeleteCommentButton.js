@@ -12,7 +12,7 @@ const DeleteCommentButton = ({ setComment, bool, id, postId, commentId }) => {
       credentials: "include",
     });
     bool ? dispatch(getFlwrPosts()) : dispatch(getUsrPosts(id))
-    setComment(true)
+    if (setComment) {setComment(true)}
   };
 
   return (
