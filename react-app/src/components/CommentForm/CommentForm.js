@@ -5,7 +5,7 @@ import { getFlwrPosts, getUsrPosts } from "../../store/post";
 import "./CommentForm.css";
 
 
-const CommentForm = ({ postId, bool, id }) => {
+const CommentForm = ({ setComment, postId, bool, id }) => {
   const [bodyText, setBodyText] = useState("");
   const dispatch = useDispatch();
 
@@ -16,9 +16,9 @@ const CommentForm = ({ postId, bool, id }) => {
       postId,
     };
     dispatch(thunk_addComment(payload));
-    console.log(bool)
     bool ? dispatch(getFlwrPosts()) : dispatch(getUsrPosts(id))
     setBodyText('')
+    if (setComment) {setComment(true)}
     };
 
   return (
