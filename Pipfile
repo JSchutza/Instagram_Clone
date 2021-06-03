@@ -32,6 +32,7 @@ botocore = "*"
 requests = "*"
 Faker = "*"
 fuzzywuzzy = {extras = ["speedup"], version = "*"}
+psycopg2 = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
