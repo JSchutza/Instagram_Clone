@@ -116,3 +116,4 @@ dmypy.json
 
 # Pipfile.lock
 Pipfile.lock
+heroku_config_vars.txt
